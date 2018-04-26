@@ -1,3 +1,16 @@
+# Delphi Unchained
+
+Clone this module to deth/dapp, then run `yarn install` and then `yarn start` to bring up the development server!
+ 
+Also you'll need to have MetaMask installed in chrome to develop on the app!
+
+## To Do
+* Add Redux, Redux Thunk
+* Add React Router
+* Link web3 react to Redux store
+
+### Create React App Docs
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
