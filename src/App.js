@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
+import store from './store'
+
 import {Web3Provider} from 'react-web3';
-import logo from './logo.svg';
-import './App.css';
+import {Provider} from 'react-redux'
+import { Route } from 'react-router'
+import { ConnectedRouter } from 'react-router-redux'
+
+// Don't like that history is required...
+import history from './history'
+
+import Home from './pages/home'
+import About from './pages/about'
 
 class App extends Component {
   render() {
     return (
-      <Web3Provider>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-      </Web3Provider>
+      <Provider store={store}>
+        <Web3Provider>
+          <ConnectedRouter history={history}>
+            <div>
+              <Route exact path="/" component={Home}/>
+              <Route path="/about" component={About}/>
+            </div>
+          </ConnectedRouter>
+        </Web3Provider>
+      </Provider>
     );
   }
 }
