@@ -1,0 +1,643 @@
+{
+    "contractName": "DelphiStake",
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "lockupRemaining",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "withdrawInitiated",
+        "outputs": [
+          {
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "claimableStake",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "allowedClaimants",
+        "outputs": [
+          {
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "lockupEnding",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "staker",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "data",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "openClaims",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "masterCopy",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "claims",
+        "outputs": [
+          {
+            "name": "claimant",
+            "type": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "name": "fee",
+            "type": "uint256"
+          },
+          {
+            "name": "surplusFee",
+            "type": "uint256"
+          },
+          {
+            "name": "data",
+            "type": "string"
+          },
+          {
+            "name": "ruling",
+            "type": "uint256"
+          },
+          {
+            "name": "ruled",
+            "type": "bool"
+          },
+          {
+            "name": "paid",
+            "type": "bool"
+          },
+          {
+            "name": "settlementFailed",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "lockupPeriod",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "token",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "settlements",
+        "outputs": [
+          {
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "name": "stakerAgrees",
+            "type": "bool"
+          },
+          {
+            "name": "claimantAgrees",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "arbiter",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_claimant",
+            "type": "address"
+          }
+        ],
+        "name": "ClaimantWhitelisted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_claimant",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_claimId",
+            "type": "uint256"
+          }
+        ],
+        "name": "ClaimOpened",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_increasedBy",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "name": "_amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "FeeIncreased",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_proposedBy",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "name": "_settlementId",
+            "type": "uint256"
+          }
+        ],
+        "name": "SettlementProposed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_acceptedBy",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "name": "_settlementId",
+            "type": "uint256"
+          }
+        ],
+        "name": "SettlementAccepted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_failedBy",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "name": "_claimId",
+            "type": "uint256"
+          }
+        ],
+        "name": "SettlementFailed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "name": "_claimId",
+            "type": "uint256"
+          }
+        ],
+        "name": "ClaimRuled",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [],
+        "name": "WithdrawInitiated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [],
+        "name": "WithdrawalPaused",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [],
+        "name": "WithdrawalResumed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [],
+        "name": "WithdrawFinalized",
+        "type": "event"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_value",
+            "type": "uint256"
+          },
+          {
+            "name": "_token",
+            "type": "address"
+          },
+          {
+            "name": "_data",
+            "type": "string"
+          },
+          {
+            "name": "_lockupPeriod",
+            "type": "uint256"
+          },
+          {
+            "name": "_arbiter",
+            "type": "address"
+          }
+        ],
+        "name": "initDelphiStake",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimant",
+            "type": "address"
+          }
+        ],
+        "name": "whitelistClaimant",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimant",
+            "type": "address"
+          },
+          {
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "name": "_fee",
+            "type": "uint256"
+          },
+          {
+            "name": "_data",
+            "type": "string"
+          }
+        ],
+        "name": "openClaim",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "name": "_amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "increaseClaimFee",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "name": "_amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "proposeSettlement",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "name": "_settlementId",
+            "type": "uint256"
+          }
+        ],
+        "name": "acceptSettlement",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          }
+        ],
+        "name": "settlementFailed",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          },
+          {
+            "name": "_ruling",
+            "type": "uint256"
+          }
+        ],
+        "name": "ruleOnClaim",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          }
+        ],
+        "name": "withdrawClaimAmount",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_value",
+            "type": "uint256"
+          }
+        ],
+        "name": "increaseStake",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "initiateWithdrawStake",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "finalizeWithdrawStake",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getNumClaims",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "_claimId",
+            "type": "uint256"
+          }
+        ],
+        "name": "getTotalFeeForClaim",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]
+}
