@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import delphi from '../data/delphi'
-import web3 from '../web3'
+import web3 from '../web3/index.js'
+import {DelphiStake} from '../web3/contracts'
 
 class Home extends React.Component {
     
@@ -13,24 +13,43 @@ class Home extends React.Component {
             _token:"0x0000000000000000000000000000000000000000",
             _data:"0x0010000ab4dd5",
             _lockupPeriod:10000,
-            _arbiter:"0x0000000000000000000000000000000000000000",
+            _arbiter:"0x0000000000000000000000000000000000000001",
         }
         this.handleInputChange = this.handleInputChange.bind(this)
-        this.createAStake = this.createAStake.bind(this)
+        this.initStake = this.initStake.bind(this)
     }
 
-    createAStake = async () => {
-
+    deployAStake = async () => {
         const accounts = await web3.eth.getAccounts()
+
+        // Get the eth address of the current user
         const activeAccount = accounts[0]
-        delphi.methods.initDelphiStake(this.state._value,
-            this.state._token, this.state._data, this.state._lockupPeriod, this.state._arbiter )
-        .send({
-            from:activeAccount
-        }, (err,res) => {
-            console.log(err, res)
-        })
+
+        // Create a Delphi Stake instance and deploy it
+        const stakeContract = await DelphiStake.new({from:activeAccount})
+
+        // Log the created contract instance --> This should be stored in the
+        // User's store!
+        console.log(stakeContract)
+
+        return stakeContract
     }
+
+    initStake = async () => {
+        // Deploy a new instance
+        const stakeContract = await this.deployAStake()
+
+        // Call a method on the deployed instance! 
+        stakeContract.claimableStake().then(result => {
+            console.log("Claimable Stake:", result)
+        })
+
+        // Should call stakeContract.initDelphiStake here, but I haven't gotten it to work yet!
+
+
+    }
+
+
 
     handleInputChange = (event) => {
         const target = event.target
@@ -89,7 +108,7 @@ class Home extends React.Component {
                  onChange={this.handleInputChange}/>
             </label>
         </form> 
-        <button onClick={this.createAStake}>
+        <button onClick={this.initStake}>
             Make your stake!!
         </button>
         <br/>

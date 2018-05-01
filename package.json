@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
-    "lerna": "^2.11.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
@@ -14,10 +13,14 @@
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "truffle-contract": "^3.0.5",
+    "truffle-hdwallet-provider": "0.0.3",
     "web3": "^1.0.0-beta.34"
   },
   "scripts": {
+    "dev": "truffle migrate --network=test; cp -r /usr/src/app/delphi-unchained/build/contracts/* /usr/src/app/delphi-unchained/src/artifacts/ ;react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
