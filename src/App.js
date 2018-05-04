@@ -8,9 +8,7 @@ import { ConnectedRouter } from 'react-router-redux'
 
 // Don't like that history is required...
 import history from './history'
-
-import Home from './pages/home'
-import About from './pages/about'
+import RouteMap from './navigation/RouteMap'
 
 class App extends Component {
   render() {
@@ -18,10 +16,7 @@ class App extends Component {
       <Provider store={store}>
         {/* <Web3Provider> */}
           <ConnectedRouter history={history}>
-            <div>
-              <Route exact path="/" component={Home}/>
-              <Route path="/about" component={About}/>
-            </div>
+            <RouteMap/>
           </ConnectedRouter>
         {/* </Web3Provider> */}
       </Provider>
