@@ -20,7 +20,7 @@
     "web3": "^1.0.0-beta.34"
   },
   "scripts": {
-    "dev": "truffle migrate --network=test; cp -r /usr/src/app/delphi-unchained/build/contracts/* /usr/src/app/delphi-unchained/src/artifacts/ ;react-scripts start",
+    "dev": "truffle migrate --network=coverage; cp -r /usr/src/app/delphi-unchained/build/contracts/* /usr/src/app/delphi-unchained/src/artifacts/ ;react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
