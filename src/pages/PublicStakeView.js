@@ -13,4 +13,4 @@ class PublicStakeView extends React.Component {
     }
 }
 
-export default withRouter(PublicStakeView)
+export default PublicStakeView
