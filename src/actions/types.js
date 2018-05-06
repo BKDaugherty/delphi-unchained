@@ -12,4 +12,8 @@ const ASYNC_REQUEST_SUFFIXES = {
 }
 
 // View Stake information
-const GET_STAKE = addSuffix("GET_STAKE", ASYNC_REQUESTS_SUFFIXES)
+export const GET_STAKE = addSuffix("GET_STAKE", ASYNC_REQUESTS_SUFFIXES)
+
+// Handles Metamask integration in Redux --> Defined by React-Web3
+export const WEB3_RECEIVE_ACCOUNT = "web3/"
+export const WEB3_CHANGE_ACCOUNT = "WEB3_CHANGE_ACCOUNT"

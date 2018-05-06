@@ -2,6 +2,7 @@
 const defaultState = {
     ethAddress:null
 }
+
 export default function(state = defaultState, action) {
     switch(action.type) {
         case 'web3/RECEIVE_ACCOUNT':
@@ -19,4 +20,4 @@ export default function(state = defaultState, action) {
         default:
             return state
     }
-  }
+}
