@@ -19,7 +19,6 @@ import TextField from 'material-ui/TextField';
 
 import Icon from 'material-ui/Icon';
 
-import { withRouter } from 'react-router'
 
 
 
@@ -109,4 +108,4 @@ class Home extends React.Component {
 
 }
 
-export default withRouter(withStyles(styles)(Home))
+export default withStyles(styles)(Home)
