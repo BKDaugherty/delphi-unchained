@@ -1,21 +1,48 @@
-# Front End Design Conventions
+# Front End Design Conventions and Support Document
 
 When developing in JavaScript, there are a lot of ways to do things. Here, we attempt to list out 
 some of the ways we decided to do them.
 
-## Terminology
+## General JavaScript
 
-### Redux Explained
-![alt text](https://camo.githubusercontent.com/9de527b9432cc9244dc600875b46b43311918b59/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6d656469612d702e736c69642e65732f75706c6f6164732f3336343831322f696d616765732f323438343739302f415243482d5265647578322d657874656e6465642d7265616c2d6465636c657261746976652e676966 "Logo Title Text 1")
+### NO SEMICOLONS
+It is very rare in JavaScript to actually need semi-colons. I personally am not a fan of the
+semi-colon, and would prefer not to use them at all. If you see one, yell at me. 
 
-This is one of the better diagrams I've found for Redux. Here we can kind of see how data flows through the app.
-Events are handled by the view, which dispatch actions. These actions are sent through our redux-thunk middleware and can call services. The results of these services are handled by other actions, and eventually are sent to our reducers, which mutate the global store. The view then rerenders only the state that is necessary.
+### Function Definitions
+There are far too many ways to define functions in JavaScript. I tend to prefer the following
 
-### Container vs Component
+* In a class
+`class PublicStakeView extends React.Component {
+    constructor(props){
+        super(props)    
+        this.render = this.render.bind(this)
+        this.getData = this.getData.bind(this)
+    }
+}`
+* In general
+`const addTwoNums = (x,y) => (x + y)
+const doSomethingComplicated = oneArgument => {
+    const intermediantResult = oneArgument + 5
+    return intermediantResult
+}`
 
-Check out this (https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0 "article") if you haven't already by the creator of redux. He makes a distinction between presentational, and container components. Brendon has in the past called these containers vs components, but we will stick to Dan Abramov's terminology from here on out. 
- 
-TLDR: A presentational component doesn't know about state. It is simply concerned with how things look, and has no dependency on the app. Containers on the other hand, supply state to the components and are sort of like glue code.
+### Avoid Iteration
+When possible, don't iterate through a list. Instead use (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map "map") or (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach "foreach")!
+
+As an example, instead of this:
+`const ClaimsView = ({claims}) => {
+    for(claim in claims)
+        return <ClaimView key={someUniqueValue} claim={claim}/>
+}`
+
+Do this:
+`const ClaimsView = ({claims}) => claims.map(claim => <ClaimView key={someUniqueValue} claim={claim}/>)`
+
+
+
+
+## React
 
 ### Binding this
 
@@ -35,4 +62,56 @@ constructor(props){
           [name]: event.target.value,
         });
     };
-`
+
+
+### Container vs Component
+
+Check out this (https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0 "article") if you haven't already by the creator of redux. He makes a distinction between presentational, and container components. Brendon has in the past called these containers vs components, but we will stick to Dan Abramov's terminology from here on out. 
+ 
+TLDR: A presentational component doesn't know about state. It is simply concerned with how things look, and has no dependency on the app. Containers on the other hand, supply state to the components and are sort of like glue code.
+
+
+### Functions vs Components
+
+* Try to make every rendering function a component!
+Instead of this
+
+    `function ClaimView(claim){
+        return (
+            <Typography color="textSecondary">
+                Claim ID:  {claim.id} <br />
+                Claim Amount: {claim.amount}<br />
+                Fee: {claim.fee}<br />
+                Surplus Fee: {claim.surplus_fee}<br />
+            </Typography>
+        )
+    }`
+
+Write this. Note that we extract props in the argument list!
+    `const ClaimView = ({claim}) => (
+
+        <Typography color="textSecondary">
+            Claim ID:  {claim.id} <br />
+            Claim Amount: {claim.amount}<br />
+            Fee: {claim.fee}<br />
+            Surplus Fee: {claim.surplus_fee}<br />
+        </Typography>
+    )`
+
+### PropTypes
+Always use PropTypes!!! It saves our time like crazy!!! Good job Gwen for starting this off.
+(https://www.npmjs.com/package/prop-types "Check out the NPM Package here!")
+
+### props.key
+When rendering multiple versions of the same component, React asks you to add a key prop to improve optimization.
+
+Instead of this: `const ClaimsView = ({claims}) => claims.map(claim => <ClaimView claim={claim}/>)`
+Do this: `const ClaimsView = ({claims}) => claims.map(claim => <ClaimView key={someUniqueValue} claim={claim}/>)`
+
+## Redux
+
+### General Overview
+![alt text](https://camo.githubusercontent.com/9de527b9432cc9244dc600875b46b43311918b59/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6d656469612d702e736c69642e65732f75706c6f6164732f3336343831322f696d616765732f323438343739302f415243482d5265647578322d657874656e6465642d7265616c2d6465636c657261746976652e676966 "Logo Title Text 1")
+
+This is one of the better diagrams I've found for Redux. Here we can kind of see how data flows through the app.
+Events are handled by the view, which dispatch actions. These actions are sent through our redux-thunk middleware and can call services. The results of these services are handled by other actions, and eventually are sent to our reducers, which mutate the global store. The view then rerenders only the state that is necessary.

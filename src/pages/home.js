@@ -1,28 +1,20 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import web3 from '../web3/index.js'
+// import web3 from '../web3/index.js'
 
 import { withStyles } from 'material-ui/styles';
-
 import {connect} from 'react-redux'
 
 // Import Material UI Components
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
 import Button from 'material-ui/Button';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
-import HomeIcon from '@material-ui/icons/Home';
-import IconButton from 'material-ui/IconButton';
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import Icon from 'material-ui/Icon';
 
 import AppHeader from '../components/AppHeader'
 
 const styles = theme => ({
     root: theme.mixins.gutters({
-      paddingTop: 8,
+      paddingTop: 40,
       paddingBottom: 16,
       marginTop: theme.spacing.unit * 3,
     }),

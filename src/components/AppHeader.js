@@ -3,8 +3,6 @@ import React from 'react'
 
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
-import Button from 'material-ui/Button';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import IconButton from 'material-ui/IconButton';
