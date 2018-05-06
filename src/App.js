@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         {/* <Web3Provider passive> */}
-          <ConnectedRouter history={history}>
+          <ConnectedRouter basename={process.env.PUBLIC_URL} history={history}>
             <RouteMap/>
           </ConnectedRouter>    
         {/* </Web3Provider>     */}

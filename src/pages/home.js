@@ -14,7 +14,7 @@ import AppHeader from '../components/AppHeader'
 
 const styles = theme => ({
     root: theme.mixins.gutters({
-      paddingTop: 40,
+      paddingTop: 60,
       paddingBottom: 16,
       marginTop: theme.spacing.unit * 3,
     }),
