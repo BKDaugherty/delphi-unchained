@@ -123,6 +123,26 @@ const ClaimView = ({claim}) => (
 
 Always use PropTypes!!! It saves our time like crazy!!! Good job Gwen for starting this off. Check the [npm Package](https://www.npmjs.com/package/prop-types) out.
 
+Here is an example:
+
+```javascript
+import PropTypes from 'prop-types';
+
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+Greeting.propTypes = {
+  name: PropTypes.string
+};
+```
+
+This way, we will receive a warning when the type of `name` in `props` is not of type `string`.
+
 ### props.key
 
 When rendering multiple versions of the same component, React asks you to add a key prop to improve optimization.
