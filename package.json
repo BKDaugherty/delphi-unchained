@@ -1,10 +1,13 @@
 {
   "name": "delphi_unchained",
   "version": "0.1.0",
-    "private": true,
-    "homepage":"http://BKDaugherty.github.io/delphi-unchained",
+  "private": true,
+  "homepage": "http://BKDaugherty.github.io/delphi-unchained",
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
+    "drizzle": "^1.1.5",
+    "drizzle-react": "^1.1.1",
+    "eth-block-tracker-es5": "^2.3.2",
     "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.44",
     "react": "^16.3.2",
@@ -18,7 +21,9 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
+    "styled-components": "^3.2.6",
     "truffle-contract": "^3.0.5",
     "truffle-hdwallet-provider": "0.0.3",
     "web3": "^1.0.0-beta.34"
@@ -28,9 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-      "eject": "react-scripts eject",
-      "predeploy":"npm run build",
-      "deploy":"gh-pages -d build"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {}
 }

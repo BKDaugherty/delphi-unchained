@@ -29572,8 +29572,174 @@
       "links": {},
       "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10",
       "transactionHash": "0x0e3df39f327d22db5ac8d1874e84063781b866c30438a4033ec653cd3de20f0d"
+    },
+    "1525754995137": {
+      "events": {
+        "0x648f92fef051e7946a669e8bf4839dc07bfe3c24417cbf8e5d098146fb471e7d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_claimant",
+              "type": "address"
+            }
+          ],
+          "name": "ClaimantWhitelisted",
+          "type": "event"
+        },
+        "0xbc3c999363eb8c947290990a79dd7e660b38135845d30bc52d23810bb5ac698c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_claimant",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_claimId",
+              "type": "uint256"
+            }
+          ],
+          "name": "ClaimOpened",
+          "type": "event"
+        },
+        "0x6b4dc782cccdba723047fe25076ad01e89ea7ad5264b25360bdfcdb9e3bb43d5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_increasedBy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_claimId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "FeeIncreased",
+          "type": "event"
+        },
+        "0xfefb25c55880e196006df381d9e65cb6a7f4d5457e50124eef4b9d5b4354bc0e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_proposedBy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_claimId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_settlementId",
+              "type": "uint256"
+            }
+          ],
+          "name": "SettlementProposed",
+          "type": "event"
+        },
+        "0x88e008c54828779944317612bf74ec51d51767114d55f6132852669fa96dadbc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_acceptedBy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_claimId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_settlementId",
+              "type": "uint256"
+            }
+          ],
+          "name": "SettlementAccepted",
+          "type": "event"
+        },
+        "0x4a791ea6468cdbbc2476c5843a7d3417a6323d06fe8f3637f581c58ee09d3d42": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_failedBy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_claimId",
+              "type": "uint256"
+            }
+          ],
+          "name": "SettlementFailed",
+          "type": "event"
+        },
+        "0x93b2cf76c3fd2e469042f8b38efad3758e54369f5146d4df3b6519e4f93c956a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_claimId",
+              "type": "uint256"
+            }
+          ],
+          "name": "ClaimRuled",
+          "type": "event"
+        },
+        "0x91ea522e5de2507a2d12093e3c43f7ed34c8b35a800fe1980c6e5f742fe939f3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_stakeReleaseTime",
+              "type": "uint256"
+            }
+          ],
+          "name": "ReleaseTimeIncreased",
+          "type": "event"
+        },
+        "0x43a0cf0d0a48969b58f39c4ef52df638b444e2522d7e32d0364e107c7db2a954": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "StakeWithdrawn",
+          "type": "event"
+        },
+        "0x8b0ed825817a2e696c9a931715af4609fc60e1701f09c89ee7645130e937eb2d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_increasedBy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_value",
+              "type": "uint256"
+            }
+          ],
+          "name": "StakeIncreased",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10",
+      "transactionHash": "0x0e3df39f327d22db5ac8d1874e84063781b866c30438a4033ec653cd3de20f0d"
     }
   },
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-05-04T01:34:43.921Z"
+  "updatedAt": "2018-05-08T04:50:49.812Z"
 }

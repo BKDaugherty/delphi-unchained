@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import store from './store'
-
-// import {Web3Provider} from 'react-web3';
+import {DrizzleProvider} from 'drizzle-react'
 import {Provider} from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-// import { Web3Provider } from 'react-web3'
 // Don't like that history is required...
 import history from './history'
 import RouteMap from './navigation/RouteMap'
 
+import {drizzleOptions} from './drizzle'
+
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        {/* <Web3Provider passive> */}
+      <DrizzleProvider options={drizzleOptions} store={store}>
+        <Provider store={store}>
           <ConnectedRouter basename={process.env.PUBLIC_URL} history={history}>
             <RouteMap/>
-          </ConnectedRouter>    
-        {/* </Web3Provider>     */}
-      </Provider>
+          </ConnectedRouter>
+          </Provider>    
+      </DrizzleProvider>
     );
   }
 }

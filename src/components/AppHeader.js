@@ -10,24 +10,20 @@ import IconButton from 'material-ui/IconButton';
 import {withStyles} from 'material-ui/styles'
 
 const classes = {
-    menuButton:{
-        marginLeft: -12,
-        marginRight: 20,
-    },
-    root:{
+    appHeader:{
         display:'flex',
-        flexDirection:'column',
-        justifyContent:'space-between'
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
     }
-
 }
 
 const AppHeader = (props) => {
     const { classes, ethAddress } = props;
     return ( 
-    <div className={classes.root}>
+    <div>
         <AppBar>
-        <Toolbar>
+        <Toolbar className={classes.appHeader}>
             <Typography variant="title" color="inherit">
                 Delphi Stake Explorer
             </Typography>
