@@ -106,9 +106,6 @@ const mapStateToProps = state => {
     }
 }
 
-StakeActionCard.contextTypes = {
-    drizzle: PropTypes.object
-}
 
 const DrizzledStakeActionCard = drizzleConnect(StakeActionCard, mapStateToProps)
 export default DrizzledStakeActionCard

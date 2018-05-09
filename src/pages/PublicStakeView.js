@@ -12,13 +12,14 @@ import Paper from 'material-ui/Paper'
 
 // Import our custom components
 import AppHeader from '../components/AppHeader'
-import StakeViewCard from '../components/StakeViewCard'
+import StakeCard from '../components/StakeCard'
 import DrizzledOwnerActions from '../components/StakeActionCard'
+
+import PropTypes from 'prop-types'
 
 // Import Application logic functions
 import {GetStakeInfoAtAddress} from '../services/delphi-backend'
 import { drizzleConnect } from 'drizzle-react'
-
 // Styles for this View
 const styles = {
     card: {
@@ -36,29 +37,30 @@ const styles = {
         fontSize: 18,
         color: 'black',
     },
+    toolbar:{
+        marginTop:65,
+    },
     pos: {
         marginBottom: 10,
     },
     root: {
         display:'flex',
         flexDirection:'row',
-        marginTop:60,
+        marginTop:100,
+        paddingTop:50,
         flexGrow: 1,
         },
     flex: {
         flex: 1,
         },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-        },
 }
 
 class PublicStakeView extends React.Component {
-    constructor(props){
+    constructor(props, context){
         super(props)    
         this.render = this.render.bind(this)
         this.getData = this.getData.bind(this)
+        this.contracts = context.drizzle.contracts
     }
 
     state = {
@@ -138,10 +140,9 @@ class PublicStakeView extends React.Component {
         return (
             <div>
                 <AppHeader ethAddress={ethAddress}/>
-                <Paper className={classes.root} elevation={4}>
-                    <StakeViewCard stake={this.state.stakeInfo} classes={classes} ethAddress={ethAddress}/>
-                    {(ethAddress && (ethAddress.toLowerCase()  === this.state.stakeInfo.staker)) && <DrizzledOwnerActions/>}
-                </Paper>
+                <div className={classes.toolbar}/>
+                <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contract={this.contracts.DelphiStake} ethAddress={ethAddress}/>
+                    {/* {(ethAddress && (ethAddress.toLowerCase()  === this.state.stakeInfo.staker)) && <DrizzledOwnerActions/>} */}
                 {/* <Button raised onClick={() => this.getData(match.params.address)}>
                     Refresh Stake
                 </Button> */}
@@ -155,6 +156,11 @@ const mapStateToProps = (state, ownProps) => ({
     ethAddress:state.accounts[0],
     drizzleStatus: state.drizzleStatus,
 })
+
+PublicStakeView.contextTypes = {
+    drizzle: PropTypes.object
+}
+
 
 
 export default drizzleConnect((withStyles(styles)(PublicStakeView)), mapStateToProps)
