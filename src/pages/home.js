@@ -87,7 +87,7 @@ class Home extends React.Component {
         <div className={classes.basePage}>
             <AppHeader ethAddress={ethAddress}/>
             <Grid justify='center' direction='column' alignItems='center' container spacing={24}>
-                <Grid item justify='center'>
+                <Grid item>
                 <Typography variant="headline" component="h3">
                     Delphi Stake Explorer
                 </Typography>

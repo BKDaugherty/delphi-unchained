@@ -4,7 +4,7 @@ import {Route} from 'react-router-dom'
 // Import all of the pages that we will use in our application
 import Home from '../pages/home'
 import PublicStakeView from '../pages/PublicStakeView'
-import Dashboard from '../pages/PublicStakeView'
+import Dashboard from '../pages/dashboard'
 
 // Defines the navigation structure of our app
 export default (props) => (

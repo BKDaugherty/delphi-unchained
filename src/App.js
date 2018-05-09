@@ -9,13 +9,19 @@ import RouteMap from './navigation/RouteMap'
 
 import {drizzleOptions} from './drizzle'
 
+import { MuiThemeProvider, } from 'material-ui/styles';
+import mui_theme from './styles/mui-theme'
+console.log(mui_theme)
+
 class App extends Component {
   render() {
     return (
       <DrizzleProvider options={drizzleOptions} store={store}>
         <Provider store={store}>
           <ConnectedRouter basename={process.env.PUBLIC_URL} history={history}>
-            <RouteMap/>
+            <MuiThemeProvider theme={mui_theme}>
+              <RouteMap/>
+            </MuiThemeProvider>
           </ConnectedRouter>
           </Provider>    
       </DrizzleProvider>

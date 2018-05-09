@@ -38,5 +38,7 @@
     "deploy": "gh-pages -d build",
     "contract": "truffle migrate --network=coverage; cp build/contracts/* src/drizzle/artifacts/"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
+  }
 }
