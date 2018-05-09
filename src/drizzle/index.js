@@ -1,4 +1,5 @@
 import DelphiStake from './artifacts/DelphiStake.json'
+
 import {generateContractsInitialState } from 'drizzle'
 
 import { all, fork } from 'redux-saga/effects'
@@ -18,7 +19,7 @@ export const drizzleOptions = {
         web3: {
           fallback: {
             type:'ws',
-            url:'ws://localhost:8545'
+            url:'ws://ganache:8545'
           }
         }
       }

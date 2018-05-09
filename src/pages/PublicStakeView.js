@@ -1,6 +1,6 @@
 // This Module defines the page that a user will
 // see as a public viewer of a stake. Lets try our
-// best to create reusable components to simplify 
+// best to create reusable components to simplify
 // our work for the private stake view as well!
 
 // Must import react in every module
@@ -58,7 +58,7 @@ const styles = {
 
 class PublicStakeView extends React.Component {
     constructor(props, context){
-        super(props)    
+        super(props)
         this.render = this.render.bind(this)
         this.getData = this.getData.bind(this)
         this.contracts = context.drizzle.contracts
@@ -77,7 +77,8 @@ class PublicStakeView extends React.Component {
 
     async getData(address){
         const stakeInfo = await GetStakeInfoAtAddress(address)
-        this.setState({stakeInfo, ...this.state})
+        console.log(stakeInfo)
+        this.setState({stakeInfo})
     }
 
     render(){
@@ -92,7 +93,8 @@ class PublicStakeView extends React.Component {
                 <div className={classes.toolbar}/>
                 <h2>{match.params.address}</h2>
                 {/* Conditionally render the stake*/}
-                {this.state.stakeInfo && <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contract={this.contracts.DelphiStake} ethAddress={ethAddress}/>}
+                {console.log(this.state.stakeInfo)}
+                {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contract={this.contracts.DelphiStake} ethAddress={ethAddress}/> : null}
                 {<Button onClick={() => this.getData(match.params.address)}>
                     Refresh Stake
                 </Button>}
