@@ -2,4 +2,6 @@ node_modules/*
 yarn-error.log
 .vscode
 installed_contracts/*
-build/*
+build/
+src/archive/*
+src/drizzle/artifacts/*

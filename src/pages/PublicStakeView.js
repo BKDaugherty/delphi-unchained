@@ -19,7 +19,6 @@ import DrizzledOwnerActions from '../components/StakeActionCard'
 import {GetStakeInfoAtAddress} from '../services/delphi-backend'
 import { drizzleConnect } from 'drizzle-react'
 
-
 // Styles for this View
 const styles = {
     card: {

@@ -29,7 +29,6 @@ const StakeViewCard = (props) => {
                 {claims_list.length > 0 ? claims_list.map(claim => <ClaimView key={claim.id} claim={claim}/>) : null}
                 
             </CardContent>
-
             <CardActions>
               <Button size="small">Learn More About This Staker</Button>
               {/* {ethAddress === stake.staker && <Button size="small">Whitelist a claimant</Button>}  */}

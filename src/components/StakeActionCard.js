@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 import {drizzleConnect} from 'drizzle-react'
 
-class OwnerActions extends React.Component {
+class StakeActionCard extends React.Component {
     constructor(props, context){    
         super(props)
         this.contracts = context.drizzle.contracts
@@ -50,7 +50,8 @@ class OwnerActions extends React.Component {
     }
 
     render() {
-    return (<Card style={{  padding:15}}>
+    return (
+    <Card style={{  padding:15}}>
         <Typography variant="title" color="inherit">
             You own this stake, so you can do stuff with it.
         </Typography>
@@ -99,20 +100,18 @@ class OwnerActions extends React.Component {
     }
 }
 
-const mapOwnerActions = state => {
+const mapStateToProps = state => {
     return {
         ethAddress:state.accounts[0],
-        ds:state.contracts.DelphiStake
     }
 }
 
-OwnerActions.contextTypes = {
+StakeActionCard.contextTypes = {
     drizzle: PropTypes.object
 }
 
-const DrizzledOwnerActions = drizzleConnect(OwnerActions, mapOwnerActions)
-
-export default DrizzledOwnerActions
+const DrizzledStakeActionCard = drizzleConnect(StakeActionCard, mapStateToProps)
+export default DrizzledStakeActionCard
 
 
   

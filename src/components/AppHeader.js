@@ -25,7 +25,7 @@ const AppHeader = (props) => {
         <AppBar>
         <Toolbar className={classes.appHeader}>
             <Typography variant="title" color="inherit">
-                Delphi Stake Explorer
+                Delphi Unchained
             </Typography>
 
             {/* Conditionally render the icon if the user has a visible ethereum account */ }

@@ -2,31 +2,50 @@ import React from 'react'
 // import web3 from '../web3/index.js'
 
 import { withStyles } from 'material-ui/styles';
-import {connect} from 'react-redux'
+import {drizzleConnect} from 'drizzle-react'
 
 // Import Material UI Components
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+import Grid from 'material-ui/Grid'
 
 import AppHeader from '../components/AppHeader'
 
 const styles = theme => ({
     root: theme.mixins.gutters({
-      paddingTop: 60,
-      paddingBottom: 16,
-      marginTop: theme.spacing.unit * 3,
+      marginTop: theme.spacing.unit * 20,
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+      justifyContent:'space-around'
     }),
     container: {
         display: 'flex',
-        flexDirection:'row',
-      },
-      textField: {
+        flexDirection:'column',
+        flex:1,
+        padding:10,
+        margin:20,
+    },
+    fieldContainer:{
+        paddingLeft:theme.spacing.unit * 2,
+        paddingRight:theme.spacing.unit * 2
+    },
+    textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
-      },
+        alignSelf:'center',
+    },
+    button:{
+        alignSelf:'center',
+    },
+    basePage:{
+        flexGrow:1,
+        marginTop: theme.spacing.unit * 20,
+        flexDirection:'column'
+
+    }
 });
 
 class Home extends React.Component {
@@ -65,30 +84,35 @@ class Home extends React.Component {
         const {classes, ethAddress} = this.props
 
         return (
-        <div>
+        <div className={classes.basePage}>
             <AppHeader ethAddress={ethAddress}/>
-            <Paper className={classes.root} elevation={4}>
+            <Grid justify='center' direction='column' alignItems='center' container spacing={24}>
+                <Grid item justify='center'>
                 <Typography variant="headline" component="h3">
-                    Search for your stake!
+                    Delphi Stake Explorer
                 </Typography>
-                <form className={classes.container} noValidate autoComplete="off">
-                    <TextField
-                    id="stakeAddress"
-                    label="Stake Address"
-                    className={classes.textField}
-                    value={this.state.stakeAddress}
-                    onChange={this.handleChange('stakeAddress')}
-                    margin="normal"
-                    />
-                </form>
-                <Button className={classes.button} 
-                variant="raised" 
-                color="primary"
-                onClick={() => this.handleStakeSearchSubmit()}>
-                GO!
-                </Button>
-            </Paper>
-            
+                </Grid>
+                <Grid item zeroMinWidth>
+                    <Paper className={classes.fieldContainer} elevation={4}>
+                        <TextField
+                                multiline
+                                id="stakeAddress"
+                                className={classes.textField}
+                                value={this.state.stakeAddress}
+                                onChange={this.handleChange('stakeAddress')}
+                                margin="normal"
+                                />
+                    </Paper>
+                </Grid>
+                <Grid item>
+                    <Button className={classes.button} 
+                        variant="raised" 
+                        color="primary"
+                        onClick={() => this.handleStakeSearchSubmit()}>
+                        Search for a Stake
+                    </Button>
+                </Grid>
+            </Grid>                            
         </div>
     )
     }
@@ -97,6 +121,6 @@ class Home extends React.Component {
 
 // This function takes the global state, and maps the portion we want into 
 // our props
-const mapStateToProps = (state) => ({ ethAddress: state.web3.ethAddress})
+const mapStateToProps = (state) => ({ ethAddress: state.accounts[0]})
 
-export default connect(mapStateToProps)(withStyles(styles)(Home))
+export default drizzleConnect(withStyles(styles)(Home), mapStateToProps)
