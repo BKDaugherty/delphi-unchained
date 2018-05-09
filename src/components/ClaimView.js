@@ -14,12 +14,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const RulingStatus = ["Justified", "Not Justified", "Collusive", "Ruling Failure"]
 
-
-// Renders a single claim
-const ClaimView = ({claim}) => (
-    <Card>
-        <CardContent>
-            <Typography color="textSecondary">
+const ClaimContent = ({claim}) => (
+    <Typography color="textSecondary">
                 Claim ID:  {claim.id} <br />
                 Claim Amount: {claim.amount}<br />
                 Fee: {claim.fee}<br />
@@ -29,7 +25,14 @@ const ClaimView = ({claim}) => (
                 {claim.ruled ? `Ruling Status: ${RulingStatus[claim.ruling]}` : null} 
                 {claim.ruled ? <br/> : null}                    
                 {claim.settlementFailed? `The settlement failed.` : null}
-            </Typography>
+    </Typography>
+)
+
+// Renders a single claim
+const ClaimCard = ({claim}) => (
+    <Card>
+        <CardContent>
+            <ClaimContent claim={claim}/>
         </CardContent>
     </Card>
 )
@@ -41,12 +44,23 @@ const ClaimExpansion = ({claim}) => (
             Claim ID: {claim.id}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <ClaimView claim={claim}/>
+            <ClaimCard claim={claim}/>
         </ExpansionPanelDetails>
     </ExpansionPanel>
 )
 
-ClaimView.propTypes = {
+const ClaimExpansionSansCard = ({claim}) => (
+    <ExpansionPanel>
+    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        Claim ID: {claim.id}
+    </ExpansionPanelSummary>
+    <ExpansionPanelDetails>
+        <ClaimContent claim={claim}/>
+    </ExpansionPanelDetails>
+    </ExpansionPanel>
+)
+
+ClaimContent.propTypes = {
     claim: PropTypes.object.isRequired,
 }
 
