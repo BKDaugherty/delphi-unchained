@@ -40,5 +40,6 @@
   },
   "devDependencies": {
     "gh-pages": "^1.1.0"
-  }
+  },
+  "proxy":"http://0.0.0.0:5000"
 }
