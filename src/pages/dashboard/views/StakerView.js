@@ -1,5 +1,5 @@
 import React from 'react'
-import StakeViewCard from '../../../components/StakeViewCard'
+import StakeCard from '../../../components/StakeCard'
 import Typography from 'material-ui/Typography'
 
 const styles = {
@@ -102,6 +102,6 @@ export default (props) => (
       <Typography variant='headline' component='h2'>
           Staker View
       </Typography>
-      <StakeViewCard classes={styles} stake={stake}/>
+      <StakeCard classes={styles} stake={stake}/>
     </div>
 )
