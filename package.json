@@ -36,7 +36,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "contract": "truffle migrate --network=coverage; cp build/contracts/* src/drizzle/artifacts/"
+    "contract": "truffle migrate --network=coverage; mkdir -p src/drizzle/artifacts ; cp build/contracts/* src/drizzle/artifacts/"
   },
   "devDependencies": {}
 }
