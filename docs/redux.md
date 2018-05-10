@@ -12,7 +12,7 @@ We do not specify individual action. Instead, we specify action creator, which i
 
 This rule is self-explaining. 
 
-### Specify Behavior of Reducer When Receiving Undefined State
+### Specify Default State
 
 If the reducer receives `undefined` as the state argument, it must return what you consider to be the initial state of the application or component. Here is (again) an example from the todo app in Redux Tutorial:
 
