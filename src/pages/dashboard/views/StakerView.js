@@ -102,6 +102,6 @@ export default (props) => (
       <Typography variant='headline' component='h2'>
           Staker View
       </Typography>
-      <StakeCard classes={styles} stake={stake}/>
+      <StakeCard classes={styles} stake={stake} userEthAddress={props.userEthAddress}/>
     </div>
 )

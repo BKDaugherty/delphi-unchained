@@ -8,13 +8,12 @@ import React from 'react'
 
 // Import the pieces of Material-UI we need
 import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
+import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 
 // Import our custom components
 import AppHeader from '../components/AppHeader'
 import StakeCard from '../components/StakeCard'
-import DrizzledOwnerActions from '../components/StakeActionCard'
 
 import PropTypes from 'prop-types'
 
@@ -23,23 +22,13 @@ import {GetStakeInfoAtAddress} from '../services/delphi-backend'
 import { drizzleConnect } from 'drizzle-react'
 // Styles for this View
 const styles = {
-    card: {
-        minWidth: 275,
-        //maxWidth: 500,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        fontSize: 17,
-        transform: 'scale(0.8)',
-    },
     title: {
         marginBottom: 16,
         fontSize: 18,
         color: 'black',
     },
     toolbar:{
-        marginTop:65,
+        marginTop:85,
     },
     pos: {
         marginBottom: 10,
@@ -47,12 +36,8 @@ const styles = {
     root: {
         display:'flex',
         flexDirection:'row',
-        marginTop:100,
-        paddingTop:50,
+        overflowWrap:'break-word',
         flexGrow: 1,
-        },
-    flex: {
-        flex: 1,
         },
 }
 
@@ -77,7 +62,6 @@ class PublicStakeView extends React.Component {
 
     async getData(address){
         const stakeInfo = await GetStakeInfoAtAddress(address)
-        console.log(stakeInfo)
         this.setState({stakeInfo})
     }
 
@@ -86,18 +70,23 @@ class PublicStakeView extends React.Component {
         // Extract match from props to get the value from the store. Disabling the linter for
         // this extraction until we use it in our dispatch
         // eslint-disable-next-line
-        const {match, classes, ethAddress} = this.props
+        const {match, classes, userEthAddress} = this.props
         return (
             <div>
-                <AppHeader ethAddress={ethAddress}/>
+                <AppHeader userEthAddress={userEthAddress}/>
                 <div className={classes.toolbar}/>
-                <h2>{match.params.address}</h2>
+                {/* <h2>{match.params.address}</h2> */}
                 {/* Conditionally render the stake*/}
-                {console.log(this.state.stakeInfo)}
-                {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contract={this.contracts.DelphiStake} ethAddress={ethAddress}/> : null}
-                {<Button onClick={() => this.getData(match.params.address)}>
-                    Refresh Stake
-                </Button>}
+                <Grid container direction='column' justify='center' alignItems='center' spacing={16}>
+                    <Grid item>
+                        {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contract={this.contracts.DelphiStake} userEthAddress={userEthAddress}/> : null}
+                    </Grid>
+                    <Grid item>
+                        {<Button variant='raised' color='secondary' onClick={() => this.getData(match.params.address)}>
+                            Refresh
+                        </Button>}
+                    </Grid>
+                </Grid>
             </div>
         )
     }
@@ -105,7 +94,7 @@ class PublicStakeView extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
     ...ownProps,
-    ethAddress:state.accounts[0],
+    userEthAddress:state.accounts[0],
     drizzleStatus: state.drizzleStatus,
 })
 

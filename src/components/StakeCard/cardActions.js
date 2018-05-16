@@ -1,14 +1,20 @@
 // Defines the set of actions that can be done
-export const stakerActions = ({ethAddress, contract}) => [
+export const stakerActions = (ethAddress, contract) => [
     {
         name:'whitelistClaimant',
         label:'Whitelist a Claimant',
-        fields:[{
-            type:'text',
-            label:'Address of Claimant',
-            id:'claimantAddress',
-            initialState:'0xf17f52151EbEF6C7334FAD080c5704D77216b732'
-        }],
+        fields:[
+            {
+                type:'text',
+                label:'Address of Claimant',
+                id:'claimantAddress',
+            },
+            {
+                type:'number',
+                label:'Claim Deadline (Unix)',
+                id:'claimantDeadline',
+            }
+    ],
         // To be displayed inside the modal...
         onSubmit: (argument) => contract.methods.whitelistClaimant(ethAddress, argument).send({from:ethAddress}),
         dialog:true,
@@ -21,7 +27,6 @@ export const stakerActions = ({ethAddress, contract}) => [
             type:'number',
             label:'Amount to Increase',
             id:'increaseStakeAmount',
-            initialState:0,
         }],
         onSubmit: (argument) => contract.methods.increaseStake(argument).send({from:ethAddress}),
         dialog:true
@@ -30,10 +35,9 @@ export const stakerActions = ({ethAddress, contract}) => [
         name:'extendStakeReleaseTime',
         label:'Extend the Stake',
         fields:[{
-            type:'time',
-            label:'Unix Time Deadline',
+            type:'number',
+            label:'Deadline (Unix)',
             id:'extendStake',
-            initialState:0,
         }],
         onSubmit:(argument) => contract.methods.extendStakeReleaseTime(argument).send({from:ethAddress}),
         dialog:true
@@ -51,8 +55,39 @@ export const arbiterActions = [
 
 ]
 
-export const claimantActions = [
+export const claimantActions = (ethAddress, contract) => [
+    {
+        name:'openClaim',
+        label:'Open a Claim',
+        fields:[
+            {
+                type:'number',
+                label:'Amount',
+                id:'claimAmount',
+            },
+            {
+                type:'number',
+                label:'Fee',
+                id:'claimFee',
+            },
+            {
+                type:'text',
+                label:'Data',
+                id:'claimData'
+            },
+            {
+                type:'checkbox',
+                label:'Skip Settlement',
+                id:'claimSkipSettlement'
+            },
+        ],
+        dialog:true,
+        onSubmit:(amount, fee, data, claimSkipSettlement) => {
+            const method = claimSkipSettlement ? contract.methods.openClaimWithoutSettlement : contract.methods.openClaim
+            return method(ethAddress, amount, fee, data).send({from:ethAddress})
+        }
 
+    }
 ]
 
 export const publicActions = [{

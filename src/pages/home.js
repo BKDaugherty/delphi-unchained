@@ -58,7 +58,7 @@ class Home extends React.Component {
 
     // State of this component. When submitted, it will be sent as a route param
     state = {
-        stakeAddress:"0x00000000000000000000000000000000"
+        stakeAddress:"0x0000000000000000000000000000000000000000"
     }
 
     // Called when our text input is changed
@@ -81,11 +81,11 @@ class Home extends React.Component {
 
     render(){
         // Extract the style from withStyles wrapper
-        const {classes, ethAddress} = this.props
+        const {classes, userEthAddress} = this.props
 
         return (
         <div className={classes.basePage}>
-            <AppHeader ethAddress={ethAddress}/>
+            <AppHeader userEthAddress={userEthAddress}/>
             <Grid justify='center' direction='column' alignItems='center' container spacing={24}>
                 <Grid item>
                 <Typography variant="headline" component="h3">
@@ -121,6 +121,6 @@ class Home extends React.Component {
 
 // This function takes the global state, and maps the portion we want into 
 // our props
-const mapStateToProps = (state) => ({ ethAddress: state.accounts[0]})
+const mapStateToProps = (state) => ({ userEthAddress: state.accounts[0]})
 
 export default drizzleConnect(withStyles(styles)(Home), mapStateToProps)

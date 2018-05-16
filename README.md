@@ -33,7 +33,7 @@ The following assumes that you are running in deth
 You should now have a development server running on port 3000, and be able to access it from your browser.
 
 ### Front End Architecture
-![Architecture Diagram](/docs/images/architecture.jpg)
+![Architecture Diagram](/docs/images/Front-End-Architecture.png)
 
 The front end is a React-Redux application that leverages Material-UI components for quick and consistent themes, and the Drizzle platform by Truffle to interact with the blockchain. React-Redux applications typically follow a standard architectural pattern that is similar in some sense to MVC frameworks, but focuses heavily on immutability and pure functions; in some sense, it is similar to the observer pattern. 
 

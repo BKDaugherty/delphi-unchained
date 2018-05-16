@@ -4,12 +4,12 @@ import React from 'react'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography';
-import HomeIcon from '@material-ui/icons/Home';
 import IconButton from 'material-ui/IconButton';
 
 import {Link} from 'react-router-dom'
 
 import {withStyles} from 'material-ui/styles'
+import { EthAvatarIcon } from './EthAddressAvatar';
 
 const classes = {
     appHeader:{
@@ -21,7 +21,7 @@ const classes = {
 }
 
 const AppHeader = (props) => {
-    const { classes, ethAddress, className } = props;
+    const { classes, userEthAddress, className } = props;
     return ( 
     <div>
         <AppBar className={className}>
@@ -32,10 +32,10 @@ const AppHeader = (props) => {
             </Typography>
             </Link>
             {/* Conditionally render the icon if the user has a visible ethereum account */ }
-            {ethAddress && 
+            {userEthAddress && 
             <Link to='/dashboard' style={{textDecoration:'none', color:'inherit'}}>
                 <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                    <HomeIcon />
+                    <EthAvatarIcon address={userEthAddress}/>
                 </IconButton>
             </Link>
             }
