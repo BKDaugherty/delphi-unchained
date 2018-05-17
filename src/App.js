@@ -11,7 +11,6 @@ import {drizzleOptions} from './drizzle'
 
 import { MuiThemeProvider, } from 'material-ui/styles';
 import mui_theme from './styles/mui-theme'
-console.log(mui_theme)
 
 class App extends Component {
   render() {

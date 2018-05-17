@@ -1,119 +1,119 @@
 import React from 'react'
 import Button from 'material-ui/Button'
-import TextField from 'material-ui/TextField'
 import Dialog, {DialogActions,DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog'
 import Grid from 'material-ui/Grid'
 import PropTypes from 'prop-types'
-import Checkbox from 'material-ui/Checkbox';
-import {InputLabel} from 'material-ui/Input'
+import { Field, reduxForm } from 'redux-form'
+import {Checkbox, TextField} from 'redux-form-material-ui'
 
-// Clean this component up!!! This will be essential for development!!!
+const ContractMethodInputField = ({type, ...rest}) => {
 
-class GeneralActionForm extends React.Component{
-        state = this.props.fields? {
-            // State to tell if the action form is open
-            open:false,
-            // Maps the 
-            ...this.props.fields.map(val => ({[val.id]:val.initialState}))
-                .reduce((acc, x) => {
-                    for (const key in x) acc[key] = x[key];
-                    return acc;
-            }, {})   
-        } :  {open:false}
+    // Set the component to be used by the Field
+    let fieldComponent;
+    if(type === 'checkbox') fieldComponent = Checkbox
+    else fieldComponent = TextField
+    return (<Field component={fieldComponent} type={type} {...rest}/>)
+}
 
-        // Called when the intial button is pressed
-        handleClickOpen = () => {
-            this.setState({open:true})
+ContractMethodInputField.propTypes = {
+    name:PropTypes.string,
+    label:PropTypes.string,
+    type:PropTypes.string,
+    // Necessary?
+    multiline:PropTypes.bool,
+    rows:PropTypes.number,
+    placeholder:PropTypes.string,
+}
+
+const ContractDialogMethodForm = ({title, description, handleSubmit, handleClose, pristine, reset, submitting, fields}) => (
+    <form onSubmit={handleSubmit}>
+        <DialogTitle id="form-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+        {/* Gives an explanation of what is going on in this dialog's function*/}
+        <DialogContentText>{description}</DialogContentText>
+
+        {/* Each field is mapped to a contract method input field with a grid for nice formatting*/}
+        {fields ? 
+            <Grid container spacing={16} direction='row' alignItems='center'>
+            {fields.map((field, key) => ( 
+                <Grid item key={key}> 
+                    <ContractMethodInputField {...field}/> 
+                </Grid> ))}
+            </Grid>
+            : null 
         }
+        </DialogContent>
+        <DialogActions>
+            {fields ? <Button color="secondary" onClick={reset} disabled={fields && (pristine || submitting)}>Reset</Button> : null }
+            <Button color="primary" onClick={handleClose}>Cancel</Button>
+            <Button color="primary" disabled={fields && (pristine || submitting)} onClick={handleSubmit}>Send</Button>
+        </DialogActions>
+    </form>
+)
+
+class DialogButton extends React.Component{
     
-        // Called to close 
-        handleClose = () => {
-            this.setState({open:false})
-        }
+    constructor(props){
+        super(props)
+        this.handleClose = this.handleClose.bind(this)
+        this.handleOpen = this.handleOpen.bind(this)
+    }
 
-        // Called to change state of fields
-        handleChange = name => event => {
-            this.setState({
-                [name]: event.target.value
-            })
-        }
+    state = {open:false}
+    
+    // Closes the dialog
+    handleClose = () => {
+        this.setState({open:false})
+    }
+    // Opens the dialog
+    handleOpen = () => {
+        this.setState({open:true})
+    }
 
-        // Calls the passed in submission function for the form
-        // and passes all arguments held in state
-        onSubmit(){
-            const {open, ...rest } = this.state
-            const paramsObject = {...rest}
-            const params = Object.values(paramsObject)
+    render = () => {
+        const DialogContentComponent = this.props.DialogContentComponent
+        const ContentComponentProps = this.props.ContentComponentProps
 
-            // The function passed in should register its own callbacks to better catch
-            // errors and handle data. Here we have added these for debugging
-
-            this.props.onSubmit(...params).then(console.log).catch(console.error)
-        }
-
-        render(){
-            return (
-                <div>
-                <Button variant='raised' color='primary' onClick={this.handleClickOpen}>{this.props.label}</Button>
-                <Dialog
+        return (
+        <div>
+            <Button variant='raised' color='primary' onClick={this.handleOpen}>{this.props.label}</Button>
+            <Dialog
                 open={this.state.open}
-                onClose={this.handleClose}
-                aria-labelledby="form-dialog-title"
-                >
-                <DialogTitle id="form-dialog-title">{this.props.label}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            {this.props.description}
-                        </DialogContentText>
-
-                        {this.props.fields ? <Grid container spacing={16} direction='row' alignItems='center'>
-                                                {this.props.fields.map(value => (
-                                                <Grid item key={`dialog-grid-${value.id}`}>
-                                                    {value.type === "checkbox" ? 
-                                                    <InputLabel>
-                                                        {value.label}
-                                                        <Checkbox
-                                                        key={`dialog-field-${value.id}`}
-                                                        label={value.label}
-                                                        id={value.id}
-                                                        checked={this.state[value.id]}
-                                                        onChange={() => this.setState({[value.id]:!this.state[value.id]})}
-                                                        margin='normal'
-                                                    />
-                                                    </InputLabel>
-                                                    
-                                                    :
-                                                    <TextField
-                                                            key={`dialog-field-${value.id}`}
-                                                            type={value.type}
-                                                            multiline={value.type === 'text'}
-                                                            label={value.label}
-                                                            id={value.id}
-                                                            value={this.state[value.id]}
-                                                            onChange={this.handleChange(value.id)}
-                                                            margin="normal"
-                                                        />}
-                                                </Grid>))}
-                                            </Grid> : null}
-                    </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleClose} color="primary">
-                                Cancel
-                            </Button>
-                            <Button onClick={() => {this.onSubmit()
-                                                    this.handleClose()}} 
-                                                    color="primary">
-                                Send
-                            </Button>
-                        </DialogActions>
-                </Dialog>
-        </div>)
+                onClose={this.handleClose}>
+                {<DialogContentComponent onSubmit={
+                    values => {
+                        this.props.dialogProps.onSubmit(values)
+                        this.handleClose()
+                    }
+                } handleClose={this.handleClose} {...ContentComponentProps}/>}
+            </Dialog>
+        </div> )
     }
 }
 
-GeneralActionForm.propTypes = {
-    open:PropTypes.bool.isRequired,
-    fields:PropTypes.object,
+DialogButton.propTypes = {
+    label:PropTypes.string,
+    DialogContentComponent:PropTypes.func,
+    ContentComponentProps:PropTypes.object,
 }
 
-export default GeneralActionForm
+const DialogForm = (props) => (
+    <DialogButton 
+        label={props.label}
+        DialogContentComponent={reduxForm({form:props.dialogProps.formName})(ContractDialogMethodForm)}
+        ContentComponentProps={props.dialogProps}
+    />
+)
+
+DialogForm.propTypes = {
+    label:PropTypes.string,
+    dialogProps:PropTypes.shape({
+        title:PropTypes.string,
+        description:PropTypes.string,
+        handleSubmit:PropTypes.func,
+        fields:PropTypes.array,
+        formName:PropTypes.string
+    })
+}
+
+export default DialogForm

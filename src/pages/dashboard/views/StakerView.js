@@ -1,6 +1,7 @@
 import React from 'react'
-import StakeCard from '../../../components/StakeCard'
 import Typography from 'material-ui/Typography'
+import AddIcon from '@material-ui/icons/Add';
+import Button from 'material-ui/Button';
 
 const styles = {
     card: {
@@ -97,11 +98,24 @@ const stake = {
   ]
 }
 
+// export default (props) => (
+//     <div>
+//       <Typography variant='headline' component='h2'>
+//           Staker View
+//       </Typography>
+//       <StakeCard classes={styles} stake={stake} userEthAddress={props.userEthAddress}/>
+//     </div>
+// )
+
 export default (props) => (
-    <div>
-      <Typography variant='headline' component='h2'>
-          Staker View
-      </Typography>
-      <StakeCard classes={styles} stake={stake} userEthAddress={props.userEthAddress}/>
-    </div>
+  <div>
+    <Typography variant='headline' component='h1'> 
+      You don't seem to have any Stakes on Delphi...
+    </Typography>
+    <Typography>Add one below!</Typography>
+
+    <Button variant="fab" color="primary" aria-label="add">
+      <AddIcon/>
+    </Button>
+  </div>
 )

@@ -1,52 +1,93 @@
 // Defines the set of actions that can be done
-export const stakerActions = (ethAddress, contract) => [
+
+
+// This really makes me feel like there is a better way...
+// Need to add in other contracts as well...
+
+// Staker Actions
+
+const whitelistClaimant = (ethAddress, contract) => ({claimantAddress, claimantDeadline}) => {
+    return contract.methods.whitelistClaimant(claimantAddress, claimantDeadline).send({from:ethAddress})
+}
+
+const increaseStake = (ethAddress, contract) => (amount) => {
+    return contract.methods.increaseStake(amount).send({from:ethAddress})
+}
+
+const extendStakeReleaseTime = (ethAddress, contract) => (stakeReleaseTime) => {
+    return contract.methods.extendStakeReleaseTime(stakeReleaseTime).send({from:ethAddress})
+}
+
+const withdrawStake = (ethAddress, contract) => () => {
+    return contract.methods.withdrawStake().send({from:ethAddress})
+}
+
+// Claimant Actions
+
+const openClaim = (ethAddress, contract) => (amount, fee, data, claimSkipSettlement) => {
+    const method = claimSkipSettlement ? contract.methods.openClaimWithoutSettlement : contract.methods.openClaim
+    return method(ethAddress, amount, fee, data).send({from:ethAddress})
+}
+
+
+export const stakerActions = (ethAddress, contracts) =>[
     {
-        name:'whitelistClaimant',
-        label:'Whitelist a Claimant',
-        fields:[
-            {
+        label:"Whitelist a Claimant", // Label of shown button
+        dialogProps:{
+            title:'whitelistClaimant',
+            description:'By whitelisting a claimant, you can allow someone to make a claim on your stake.',
+            onSubmit: whitelistClaimant(ethAddress, contracts.DelphiStake),
+            formName:"WhitelistClaimantForm",
+            fields:[{
                 type:'text',
                 label:'Address of Claimant',
-                id:'claimantAddress',
+                name:'claimantAddress',
+                multiline:true,
             },
             {
                 type:'number',
                 label:'Claim Deadline (Unix)',
-                id:'claimantDeadline',
-            }
-    ],
-        // To be displayed inside the modal...
-        onSubmit: (claimantAddress, claimDeadline) => contract.methods.whitelistClaimant(claimantAddress, claimDeadline).send({from:ethAddress}),
-        dialog:true,
+                name:'claimantDeadline',
+            }]
+        }
+    },            
+    {
+        label:"Increase Stake Amount",
+        dialogProps:{
+            title:'Increase the Staked Amount',
+            description:'Increase the amount of funds in the stake.',
+            onSubmit: increaseStake(ethAddress, contracts),
+            formName:'IncreaseStakeForm',
+            fields:[{
+                type:'number',
+                label:'Amount to Increase',
+                name:'increaseStakeAmount'
+            }]
+        }
     },
     {
-        name:'increaseStake',
-        label:'Increase your Stake',
-        fields:[{
-            type:'number',
-            label:'Amount to Increase',
-            id:'increaseStakeAmount',
-        }],
-        onSubmit: (argument) => contract.methods.increaseStake(argument).send({from:ethAddress}),
-        dialog:true
-    },
-    {
-        name:'extendStakeReleaseTime',
         label:'Extend the Stake',
-        fields:[{
-            type:'number',
-            label:'Deadline (Unix)',
-            id:'extendStake',
-        }],
-        onSubmit:(argument) => contract.methods.extendStakeReleaseTime(argument).send({from:ethAddress}),
-        dialog:true
+        dialogProps:{
+            title:'Extend the Stake',
+            description:"Extend the stake's deadline",
+            onSubmit: extendStakeReleaseTime(ethAddress, contracts.DelphiStake),
+            formName:'ExtendStakeForm',
+            fields:[{
+                type:'number',
+                label:'Deadline (Unix)',
+                name:'extendStake',
+            }],
+            
+        },
     },
     {
-        name:'withdrawStake',
-        label:'Withdraw your Stake',
-        description:'Are you sure you would like to withdraw your stake?',
-        onSubmit:() => contract.methods.withdrawStake().send({from:ethAddress}),
-        dialog:true
+        label:'Withdraw the Stake',
+        dialogProps:{
+            title:'Withdraw the Stake',
+            description:'Are you sure you would like to withdraw your stake?',
+            onSubmit:withdrawStake(ethAddress, contracts),
+            formName:'WithdrawStakeForm',
+        }
     }
 ]
 
@@ -54,44 +95,44 @@ export const arbiterActions = [
 
 ]
 
-export const claimantActions = (ethAddress, contract) => [
+export const claimantActions = (ethAddress, contracts) => [
     {
-        name:'openClaim',
         label:'Open a Claim',
-        fields:[
+        dialogProps:{
+            title:'Open a Claim',
+            description:"Open a claim against this stake",
+            formName:'OpenClaimForm',
+            onSubmit:openClaim(ethAddress, contracts),
+            fields:[
             {
                 type:'number',
                 label:'Amount',
-                id:'claimAmount',
+                name:'claimAmount',
             },
             {
                 type:'number',
                 label:'Fee',
-                id:'claimFee',
+                name:'claimFee',
             },
             {
                 type:'text',
                 label:'Data',
-                id:'claimData'
+                name:'claimData'
             },
             {
                 type:'checkbox',
                 label:'Skip Settlement',
-                id:'claimSkipSettlement'
+                name:'claimSkipSettlement'
             },
-        ],
-        dialog:true,
-        onSubmit:(amount, fee, data, claimSkipSettlement) => {
-            const method = claimSkipSettlement ? contract.methods.openClaimWithoutSettlement : contract.methods.openClaim
-            return method(ethAddress, amount, fee, data).send({from:ethAddress})
+            ],
         }
-
     }
 ]
 
 export const publicActions = [{
     name:'learnMore',
     label:'Learn More About This Staker',
-    onSubmit:console.log
+    onSubmit:console.log,
+    
 }
 ]

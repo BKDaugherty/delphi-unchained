@@ -4,6 +4,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import StakerView from './../views/StakerView'
 import ClaimantView from './../views/ClaimantView'
 import DashboardView from './../views/DashboardView'
+import ArbiterView from './../views/ArbiterView'
+
 
 const dashboardRoutes = [
     {
@@ -25,6 +27,12 @@ const dashboardRoutes = [
         name: "Claimant Mode",
         icon: AccountCircle,
         component: ClaimantView
+    },
+    {
+        path: "/dashboard/arbiter",
+        name: "Arbiter Mode",
+        icon: AccountCircle,
+        component: ArbiterView
     },
 
    

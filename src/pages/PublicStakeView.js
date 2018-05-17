@@ -79,7 +79,7 @@ class PublicStakeView extends React.Component {
                 {/* Conditionally render the stake*/}
                 <Grid container direction='column' justify='center' alignItems='center' spacing={16}>
                     <Grid item>
-                        {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contract={this.contracts.DelphiStake} userEthAddress={userEthAddress}/> : null}
+                        {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contracts={this.contracts} userEthAddress={userEthAddress}/> : null}
                     </Grid>
                     <Grid item>
                         {<Button variant='raised' color='secondary' onClick={() => this.getData(match.params.address)}>
