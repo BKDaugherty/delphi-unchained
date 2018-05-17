@@ -15,6 +15,7 @@ contract DelphiStake {
     event ReleaseTimeIncreased(uint _stakeReleaseTime);
     event StakeWithdrawn();
     event StakeIncreased(address _increasedBy, uint _value);
+    event StakeCreated(address _staker, uint _value, uint _minimumFee, string _data, uint _stakeReleaseTime, address _arbiter);
 
 
     struct Claim {
@@ -163,6 +164,8 @@ contract DelphiStake {
         stakeReleaseTime = _stakeReleaseTime;
         arbiter = _arbiter;
         staker = msg.sender;
+
+        StakeCreated(staker, claimableStake, minimumFee, data, stakeReleaseTime, arbiter);
     }
 
     /*
