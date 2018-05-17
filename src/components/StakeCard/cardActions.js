@@ -16,9 +16,8 @@ export const stakerActions = (ethAddress, contract) => [
             }
     ],
         // To be displayed inside the modal...
-        onSubmit: (argument) => contract.methods.whitelistClaimant(ethAddress, argument).send({from:ethAddress}),
+        onSubmit: (argument) => contract.methods.whitelistClaimant(...argument).send({from:ethAddress}),
         dialog:true,
-        //Potential for icon in button???
     },
     {
         name:'increaseStake',
