@@ -1,4 +1,13 @@
-import AccountCircle from '@material-ui/icons/AccountCircle';
+/*
+    Defines the configuration files for our dashboard. 
+    The exported JSON array will specify the structure of 
+    the resulting dashboard
+*/
+
+import DashboardIcon from '@material-ui/icons/Dashboard'
+import GavelIcon from '@material-ui/icons/Gavel'
+import ReportProblemIcon from'@material-ui/icons/ReportProblem'
+import VerifiedUserIcon from'@material-ui/icons/VerifiedUser'
 
 // Views
 import StakerView from './../views/StakerView'
@@ -11,27 +20,27 @@ const dashboardRoutes = [
     {
         path: "/dashboard",
         name: "Dashboard",
-        icon: AccountCircle,
+        icon: DashboardIcon,
         component: DashboardView,
         exact:true
     },
 
     {
         path: "/dashboard/staker",
-        name: "Staker Mode",
-        icon: AccountCircle,
+        name: "Stake",
+        icon: VerifiedUserIcon,
         component: StakerView
     },
     {
         path: "/dashboard/claimant",
-        name: "Claimant Mode",
-        icon: AccountCircle,
+        name: "Claim",
+        icon: ReportProblemIcon,
         component: ClaimantView
     },
     {
         path: "/dashboard/arbiter",
-        name: "Arbiter Mode",
-        icon: AccountCircle,
+        name: "Arbit",
+        icon: GavelIcon,
         component: ArbiterView
     },
 

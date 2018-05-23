@@ -1,3 +1,5 @@
+/* Renders a presenational component for a stake */
+
 import React from 'react'
 import Grid from 'material-ui/Grid'
 import Card, {CardHeader, CardContent} from 'material-ui/Card'

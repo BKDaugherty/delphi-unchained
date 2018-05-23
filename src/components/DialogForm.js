@@ -70,22 +70,24 @@ class DialogButton extends React.Component{
         this.setState({open:true})
     }
 
+    submit = values => {
+        // console.log(values)
+        this.props.ContentComponentProps.onSubmit({...values})
+        this.handleClose()
+    }
+
     render = () => {
         const DialogContentComponent = this.props.DialogContentComponent
         const ContentComponentProps = this.props.ContentComponentProps
-
+        const ButtonComponent = this.props.ButtonComponent
         return (
         <div>
-            <Button variant='raised' color='primary' onClick={this.handleOpen}>{this.props.label}</Button>
+            {ButtonComponent ? <ButtonComponent onClick={this.handleOpen}/> : <Button variant='raised' color='primary' onClick={this.handleOpen}>{this.props.label}</Button>}
             <Dialog
                 open={this.state.open}
                 onClose={this.handleClose}>
-                {<DialogContentComponent onSubmit={
-                    values => {
-                        this.props.dialogProps.onSubmit(values)
-                        this.handleClose()
-                    }
-                } handleClose={this.handleClose} {...ContentComponentProps}/>}
+                {<DialogContentComponent {...ContentComponentProps} onSubmit={this.submit.bind(this)}
+                 handleClose={this.handleClose} />}
             </Dialog>
         </div> )
     }
@@ -95,6 +97,7 @@ DialogButton.propTypes = {
     label:PropTypes.string,
     DialogContentComponent:PropTypes.func,
     ContentComponentProps:PropTypes.object,
+    ButtonComponent:PropTypes.func
 }
 
 const DialogForm = (props) => (
@@ -102,6 +105,7 @@ const DialogForm = (props) => (
         label={props.label}
         DialogContentComponent={reduxForm({form:props.dialogProps.formName})(ContractDialogMethodForm)}
         ContentComponentProps={props.dialogProps}
+        ButtonComponent={props.ButtonComponent}
     />
 )
 

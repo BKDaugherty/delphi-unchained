@@ -5,6 +5,7 @@ import dashboardRoutes from './routes'
 import AppHeader from '../../components/AppHeader'
 import { NavLink } from "react-router-dom";
 import PropTypes from 'prop-types'
+import {drizzleConnect} from 'drizzle-react'
 import {
     withStyles,
     Drawer,
@@ -15,13 +16,20 @@ import {
     Typography
   } from "material-ui";
 
-const switchRoutes = (
-    <Switch>
-      {dashboardRoutes.map((prop, key) => {
-        return <Route exact={prop.exact} path={prop.path} component={prop.component} key={key}  />;
-      })}
-    </Switch>
-);
+const SwitchRoutes = (props) => (
+  <Switch>
+    {dashboardRoutes.map((prop, key) => {
+      const Component = prop.component
+
+      return (
+      <Route exact={prop.exact} 
+        path={prop.path} 
+        component={(properties) => <Component {...properties} userEthAddress={props.userEthAddress} />}
+        key={key}/>
+      )
+    })}  
+  </Switch>
+)
 
 // Arbitrary...
 const drawerWidth = 240
@@ -55,6 +63,7 @@ const SidebarLink = (props) => (
         to={props.path}
         activeClassName="active"
         key={props.key}
+        style={{textDecoration:'none'}}
      >
     <ListItem button>
         <ListItemIcon>
@@ -69,11 +78,11 @@ const SidebarLink = (props) => (
     </NavLink>)
 
 const ClippedDrawer = (props) => {
-    const { classes } = props;
+    const { classes, userEthAddress } = props;
   
     return (
       <div className={classes.root}>
-        <AppHeader className={classes.appBar}/>
+        <AppHeader userEthAddress={userEthAddress} className={classes.appBar}/>
         <Drawer
           variant="permanent"
           classes={{
@@ -84,13 +93,13 @@ const ClippedDrawer = (props) => {
           <div className={classes.toolbar} />
           <List>
               {/* Drawer Buttons */}
-              {dashboardRoutes.map(route => <SidebarLink path={route.path} name={route.name} icon={route.icon}/>)}
+              {dashboardRoutes.map((route) => <SidebarLink path={route.path} name={route.name} icon={route.icon}/>)}
           </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {/* Adds the switch router*/}
-          {switchRoutes}
+          <SwitchRoutes userEthAddress={userEthAddress}/>
         </main>
       </div>
     );
@@ -99,6 +108,17 @@ const ClippedDrawer = (props) => {
   ClippedDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
   };
+
+
+const StyledDrawer = withStyles(styles)(ClippedDrawer)
   
-  export default withStyles(styles)(ClippedDrawer);
+
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps,
+    userEthAddress:state.accounts[0],
+    drizzleStatus: state.drizzleStatus,
+})
+
+
+export default drizzleConnect(StyledDrawer, mapStateToProps);
   

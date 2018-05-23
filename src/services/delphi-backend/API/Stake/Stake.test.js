@@ -1,3 +1,8 @@
+/*
+  Defines unit tests for the JavaScript SDK interactions with the Delphi API
+  Resource "Stake"
+*/
+
 import GetStakeInfoAtAddress from './Stake'
 
 const mockObject = {        

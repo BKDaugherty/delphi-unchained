@@ -1,17 +1,9 @@
-import DelphiStake from './artifacts/DelphiStake.json'
-
-import {generateContractsInitialState } from 'drizzle'
+/* Configures Drizzle to be imported by the provider */
 
 import { all, fork } from 'redux-saga/effects'
 import { drizzleSagas } from 'drizzle'
-
 export const drizzleOptions = {
-        contracts:[DelphiStake],
-        // events: {
-        //   contractName: [
-        //     eventName
-        //   ]
-        // },
+        //contracts:[DelphiStakeFactory],
         polls: {
           accounts: 3000,
         //   blocks: interval
@@ -29,7 +21,4 @@ export function* rootSaga() {
     drizzleSagas.map(saga => fork(saga))
     )
 }
-
-export const initialState = {
-    contracts: generateContractsInitialState(drizzleOptions)
-}
+export const initialState = {}

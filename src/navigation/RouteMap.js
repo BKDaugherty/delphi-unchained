@@ -1,3 +1,7 @@
+/*
+    Defines the routing structure for the top level of our app.
+*/
+
 import React from 'react'
 import {Route} from 'react-router-dom'
 

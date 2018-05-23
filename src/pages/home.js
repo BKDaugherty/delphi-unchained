@@ -1,5 +1,7 @@
+
+
+
 import React from 'react'
-// import web3 from '../web3/index.js'
 
 import { withStyles } from 'material-ui/styles';
 import {drizzleConnect} from 'drizzle-react'
@@ -70,7 +72,7 @@ class Home extends React.Component {
 
     // Called when the search button is pressed
     handleStakeSearchSubmit = () => {
-        // Dispatch navigation
+        // Navigate to a different page
         const {history} = this.props
         history.push(`/stake/${this.state.stakeAddress}`)
     }
@@ -80,7 +82,8 @@ class Home extends React.Component {
     }
 
     render(){
-        // Extract the style from withStyles wrapper
+        // classes is supplied by withStyles
+        // userEthAddress is supplied by drizzle-connect
         const {classes, userEthAddress} = this.props
 
         return (
@@ -119,8 +122,7 @@ class Home extends React.Component {
 
 }
 
-// This function takes the global state, and maps the portion we want into 
-// our props
+// Connect our component to the Redux Store using Drizzle
 const mapStateToProps = (state) => ({ userEthAddress: state.accounts[0]})
 
 export default drizzleConnect(withStyles(styles)(Home), mapStateToProps)

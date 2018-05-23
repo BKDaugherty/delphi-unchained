@@ -1,3 +1,7 @@
+/*
+    Util file for common functions used across modules
+*/
+
 // Curried function that accepts two addresses and checks if they
 // are the same
 export const sameAddress = addr1 => addr2 => {

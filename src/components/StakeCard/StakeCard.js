@@ -1,3 +1,5 @@
+/* Renders an informational and actionable card for Stakes */
+
 import React from 'react'
 import Card, {CardContent, CardActions, CardHeader} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
@@ -23,8 +25,9 @@ const StakeCardHeader = (props) => (
 
 // Renders the information on a stake
 const StakeCard = (props) => {
-    const { classes, stake , address, userEthAddress, contracts} = props
+    let { classes, stake , address, userEthAddress} = props
     const whitelisted_claimants = stake.whitelisted_claimants
+    const token_address = stake.token.address
 
     // Curry those functions
     const addressIs = sameAddress(userEthAddress)
@@ -35,10 +38,10 @@ const StakeCard = (props) => {
     let actions;
 
     if(addressIs(stake.staker)){
-        actions = stakerActions(userEthAddress, contracts)
+        actions = stakerActions(userEthAddress, address, token_address)
     }
     else if (whitelisted_claimants.some(addressIs)){
-        actions = claimantActions(userEthAddress, contracts)
+        actions = claimantActions(userEthAddress)
     } else {
         actions = publicActions
     }
@@ -54,10 +57,10 @@ const StakeCard = (props) => {
                     {actions ? 
                         actions.map(
                             (action, key) => (
-                                <Grid item> 
+                                <Grid item key={key}> 
                                     { action.dialogProps ? 
-                                        <DialogForm key={key} {...action}/> 
-                                        : <Button {...action}/> 
+                                        <DialogForm {...action}/> 
+                                        : <Button {...action}>{action.label}</Button> 
                                     } 
                                 </Grid> )
                             ) 

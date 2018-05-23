@@ -1,4 +1,8 @@
-import {ENDPOINTS } from './config'
+/*
+    Holds the JavaScript SDK of interacting with the Delphi API Resource "Stake"
+*/
+
+import {ENDPOINTS } from './../config'
 
 const GetStakeInfoAtAddress = async (address) => {
     try {
