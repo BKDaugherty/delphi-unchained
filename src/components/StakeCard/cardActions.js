@@ -2,7 +2,7 @@
 
 import {DelphiStake, EIP20} from '../../services/delphi-contract'
 
-import {isValidEthereumAddress} from '../../util/validation'
+import {isValidEthereumAddress, isInTheFuture} from '../../util/validation'
 
 // Staker Actions
 const whitelistClaimant = (ethAddress, stakeAddress) => async ({claimantAddress, claimantDeadline}) => {
@@ -12,7 +12,6 @@ const whitelistClaimant = (ethAddress, stakeAddress) => async ({claimantAddress,
 
 // Checks if each field in form is valid, and
 // stops submission and alerts user if a field is invalid.
-
 
 const validateWhitelistClaimant = ({claimantAddress, claimantDeadline}) => {
     let errors = {}
@@ -36,9 +35,9 @@ const validateWhitelistClaimant = ({claimantAddress, claimantDeadline}) => {
         JavaScript time is given in milliseconds, divide by 1000
         to get seconds for unix time since epoch.
     */
-   
-    else if (claimantDeadlineAsNumber < (Date.now() / 1000)){    
-        errors.claimantDeadline = 'Must be a Unix time in the future'
+
+    else if (!isInTheFuture(claimantDeadlineAsNumber)){    
+        errors.claimantDeadline = 'Must be a unix time in the future'
     }
 
     // TODO: Add info per whitelisted user. (Extract from Redux?)
@@ -63,9 +62,50 @@ const increaseStake = (ethAddress, stakeAddress, tokenAddress) => async ({increa
     return result
 }
 
+const validateIncreaseStake = ({increaseStakeAmount}) => {
+    let errors = {}
+
+    const increaseStakeAmountAsNumber = Number(increaseStakeAmount)
+
+    if(!increaseStakeAmount){
+        errors.increaseStakeAmount = 'Required'
+    } else if(isNaN(increaseStakeAmountAsNumber)){
+        errors.increaseStakeAmount = 'Must be a number'
+    } else if (increaseStakeAmountAsNumber < 0){
+        errors.increaseStakeAmount = 'Must be a positive number'
+    }
+
+    // TODO : Check if the user has enough tokens to increase the stake
+    // else if ()
+
+    return errors
+
+}
+
 const extendStakeReleaseTime = (ethAddress, stakeAddress) => async ({stakeReleaseTime}) => {
     const stake = await DelphiStake.at(stakeAddress)
     return stake.extendStakeReleaseTime(stakeReleaseTime,{from:ethAddress})
+}
+
+const validateExtendStakeReleaseTime = ({stakeReleaseTime}) => {
+    let errors = {}
+
+    const stakeReleaseTimeAsNumber = Number(stakeReleaseTime)
+
+    if(!stakeReleaseTime){
+        errors.stakeReleaseTime = 'Required'
+    } else if(isNaN(stakeReleaseTimeAsNumber)){
+        errors.stakeReleaseTime = 'Must be a number representing unix time'
+    } else if (!isInTheFuture(stakeReleaseTimeAsNumber)){
+        errors.stakeReleaseTime = 'Must be a unix time in the future'
+    }
+
+    return errors
+    // TODO: Check if stake release time given is greater than current
+    // Stake time
+    // else if(stakeReleaseTime is less than current stakeReleaseTime){
+    // errors.stakeReleaseTime must be larger than current stake release time
+    // }
 }
 
 const withdrawStake = (ethAddress, stakeAddress) => async () => {
@@ -75,10 +115,48 @@ const withdrawStake = (ethAddress, stakeAddress) => async () => {
 
 // Claimant Actions
 
+
+
 const openClaim = (ethAddress, stakeAddress) => async ({claimAmount, claimFee, claimData, claimSkipSettlement}) => {
     const stake = await DelphiStake.at(stakeAddress)
     const method = claimSkipSettlement ? stake.openClaimWithoutSettlement : stake.openClaim
     return method(ethAddress, claimAmount, claimFee, claimData, {from:ethAddress})
+}
+
+const validateOpenClaim = ({claimAmount, claimFee, claimData}) => {
+    let errors = {}
+
+    const claimAmountAsNumber = Number(claimAmount)
+    if(!claimAmount){
+        errors.claimAmount = 'Required'
+    } else if(isNaN(claimAmountAsNumber)){
+        errors.claimAmount = 'Must be a valid number'
+    } else if (claimAmountAsNumber){
+        errors.claimAmount = 'Must be a positive number'
+    }
+
+    //TODO: Claim amount must be payable by staker
+    // else if(claimAmountAsNumber + claimFeeAsNumber > stake + claimFee){
+    //     errors.claimAmount = 'The claim amount + the claim fee must be payable by the staker'
+    // }
+
+    const claimFeeAsNumber = Number(claimFee)
+
+    if(!claimFee){
+        errors.claimFee = 'Required'
+    } else if (isNaN(claimFeeAsNumber)){
+        errors.claimFee = 'Must be a number'
+    } else if (claimFeeAsNumber < 0){
+        errors.claimFee = ' Must be a positive number'
+    } //else if ()
+
+    if(!claimData){
+        errors.claimData = 'Required'
+    }
+
+    return errors
+
+
 }
 
 
@@ -111,6 +189,7 @@ export const stakerActions = (ethAddress, stakeAddress, tokenAddress) =>[
             description:'Increase the amount of funds in the stake.',
             onSubmit: increaseStake(ethAddress, stakeAddress, tokenAddress),
             formName:'IncreaseStakeForm',
+            validate:validateIncreaseStake,
             fields:[{
                 type:'number',
                 label:'Amount to Increase',
@@ -125,6 +204,7 @@ export const stakerActions = (ethAddress, stakeAddress, tokenAddress) =>[
             description:"Extend the stake's deadline",
             onSubmit: extendStakeReleaseTime(ethAddress, stakeAddress),
             formName:'ExtendStakeForm',
+            validate:validateExtendStakeReleaseTime,
             fields:[{
                 type:'number',
                 label:'Deadline (Unix)',
@@ -154,6 +234,7 @@ export const claimantActions = (ethAddress, contracts) => [
             description:"Open a claim against this stake",
             formName:'OpenClaimForm',
             onSubmit:openClaim(ethAddress, contracts),
+            validate:validateOpenClaim,
             fields:[
             {
                 type:'number',
