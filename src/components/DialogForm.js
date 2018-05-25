@@ -103,7 +103,7 @@ DialogButton.propTypes = {
 const DialogForm = (props) => (
     <DialogButton 
         label={props.label}
-        DialogContentComponent={reduxForm({form:props.dialogProps.formName})(ContractDialogMethodForm)}
+        DialogContentComponent={reduxForm({form:props.dialogProps.formName, validate:props.dialogProps.validate})(ContractDialogMethodForm)}
         ContentComponentProps={props.dialogProps}
         ButtonComponent={props.ButtonComponent}
     />
@@ -115,6 +115,7 @@ DialogForm.propTypes = {
         title:PropTypes.string,
         description:PropTypes.string,
         handleSubmit:PropTypes.func,
+        validate:PropTypes.func,
         fields:PropTypes.array,
         formName:PropTypes.string
     })

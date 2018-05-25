@@ -2,10 +2,54 @@
 
 import {DelphiStake, EIP20} from '../../services/delphi-contract'
 
+import {isValidEthereumAddress} from '../../util/validation'
+
 // Staker Actions
 const whitelistClaimant = (ethAddress, stakeAddress) => async ({claimantAddress, claimantDeadline}) => {
     const stake = await DelphiStake.at(stakeAddress)
     return stake.whitelistClaimant(claimantAddress, claimantDeadline, {from:ethAddress})
+}
+
+// Checks if each field in form is valid, and
+// stops submission and alerts user if a field is invalid.
+
+
+const validateWhitelistClaimant = ({claimantAddress, claimantDeadline}) => {
+    let errors = {}
+    
+    // Validate the input Ethereum Address
+    if(!claimantAddress){
+        errors.claimantAddress = 'Required'
+    } else if(!isValidEthereumAddress(claimantAddress)){
+        errors.claimantAddress = 'Invalid Ethereum Address'
+    }
+
+    const claimantDeadlineAsNumber = Number(claimantDeadline)
+
+    // Validate the input deadline
+    if(!claimantDeadline){
+        errors.claimantDeadline = 'Required'
+    } else if (isNaN( claimantDeadlineAsNumber)){
+        errors.claimantDeadline = 'Must be a number in Unix format'
+    } 
+    /*  
+        JavaScript time is given in milliseconds, divide by 1000
+        to get seconds for unix time since epoch.
+    */
+   
+    else if (claimantDeadlineAsNumber < (Date.now() / 1000)){    
+        errors.claimantDeadline = 'Must be a Unix time in the future'
+    }
+
+    // TODO: Add info per whitelisted user. (Extract from Redux?)
+    // New deadline must be greater than current deadline 
+    // for this claimant, if h/she has been whitelisted before
+    // as per Solidity contract
+    // else if(claimantDeadlineAsNumber){
+    //     errors.claimDeadline = ''
+    // }
+
+    return errors
 }
 
 
@@ -46,6 +90,7 @@ export const stakerActions = (ethAddress, stakeAddress, tokenAddress) =>[
             description:'By whitelisting a claimant, you can allow someone to make a claim on your stake.',
             onSubmit: whitelistClaimant(ethAddress, stakeAddress),
             formName:"WhitelistClaimantForm",
+            validate: validateWhitelistClaimant,
             fields:[{
                 type:'text',
                 label:'Address of Claimant',
