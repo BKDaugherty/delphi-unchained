@@ -10,11 +10,15 @@ import PropTypes from 'prop-types'
 
 import {EthAvatarIcon} from '../EthAddressAvatar'
 
-import {publicActions, stakerActions, claimantActions} from './cardActions'
-import {sameAddress} from '../../util'
+
 
 import StakeCardContent from './StakeCardContent'
 import DialogForm from '../DialogForm'
+
+import {sameAddress} from '../../util'
+import StakerActions from './CardActions/StakerActions'
+import WhitelisteeActions from './CardActions/WhitelisteeActions'
+import PublicActions from './CardActions/PublicActions'
 
 const StakeCardHeader = (props) => (
     <CardHeader
@@ -38,12 +42,12 @@ const StakeCard = (props) => {
     let actions;
 
     if(addressIs(stake.staker)){
-        actions = stakerActions(userEthAddress, address, token_address)
+        actions = StakerActions(userEthAddress, address, token_address)
     }
     else if (whitelisted_claimants.some(addressIs)){
-        actions = claimantActions(userEthAddress)
+        actions = WhitelisteeActions(userEthAddress, address)
     } else {
-        actions = publicActions
+        actions = PublicActions
     }
 
     return (
