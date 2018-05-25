@@ -32,5 +32,5 @@ export const withdrawStake = (ethAddress, stakeAddress) => async () => {
 export const openClaim = (ethAddress, stakeAddress) => async ({claimAmount, claimFee, claimData, claimSkipSettlement}) => {
     const stake = await DelphiStake.at(stakeAddress)
     const method = claimSkipSettlement ? stake.openClaimWithoutSettlement : stake.openClaim
-    return method(ethAddress, claimAmount, claimFee, claimData, {from:ethAddress})
+    return method(claimAmount, claimFee, claimData, {from:ethAddress})
 }
