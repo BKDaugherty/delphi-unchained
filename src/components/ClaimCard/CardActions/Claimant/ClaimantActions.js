@@ -4,7 +4,7 @@
 
 import CLAIM_STATES from './../ClaimStates'
 import {AcceptSettlement, IncreaseClaimFee, ProposeSettlement, SettlementFailed } from './../Actions'
-import {SupplyActionsEthInfo, GenerateActionsFromMap} from './../util'
+import {GenerateActionsFromMap} from './../util'
 
 const PreArbitrationClaimActions = [ProposeSettlement, SettlementFailed]
 const PreArbitrationSettlementByStakerClaimActions = [AcceptSettlement, SettlementFailed]

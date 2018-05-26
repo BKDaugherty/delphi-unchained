@@ -1,11 +1,8 @@
 
 import {
-    validationValueToNumber,
-    validEthAddress, 
     validInteger, 
     validNumber, 
     validPositive, 
-    validTimeInTheFuture,
     validRequired,
     CombinedValidator,
 } from './../../../util/validation'

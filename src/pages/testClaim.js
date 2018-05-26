@@ -2,10 +2,10 @@ import React from 'react'
 import ClaimCard from '../components/ClaimCard/ClaimCard'
 import AppHeader from '../components/AppHeader'
 import Paper from 'material-ui/Paper'
+import {drizzleConnect} from 'drizzle-react'
 import { withStyles } from 'material-ui';
-const userEthAddress = '0xf17f52151EbEF6C7334FAD080c5704D77216b732'
 
-const TestPage = ({classes}) => {
+const TestPage = ({classes, userEthAddress}) => {
     return (
         <div>
             <AppHeader userEthAddress={userEthAddress}/>
@@ -30,4 +30,12 @@ const styles = {
     }
 }
 
-export default withStyles(styles)(TestPage)
+const StyledTestPage = withStyles(styles)(TestPage)
+
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps,
+    userEthAddress:state.accounts[0],
+    // drizzleStatus: state.drizzleStatus,
+})
+
+export default drizzleConnect(StyledTestPage, mapStateToProps)

@@ -4,12 +4,14 @@
 import React from 'react'
 
 import Grid from 'material-ui/Grid'
-import Card, { CardContent, CardActions } from 'material-ui/Card'
+import Card, { CardContent, CardActions, CardHeader } from 'material-ui/Card'
 import { EthAvatarIcon, EthAddressDisplayCard } from '../EthAddressAvatar'
 
 import DialogForm from '../DialogForm'
 import DialogActionList from '../DialogActionList'
 import {sameAddress} from '../../util'
+
+import {withStyles, Typography} from 'material-ui'
 
 // Import Claim Actions
 import CLAIM_STATES from './CardActions/ClaimStates'
@@ -27,7 +29,7 @@ const hardcoded_claim = {
     data:'I like cats',
     ruling:0, //0 1 2 or 3 
     ruled:false, 
-    settlement_failed:false,
+    settlement_failed:true,
     // These two fields I'm not sure if we should include, but I will need to get them somehow
     // Could be pulled from stake? Not sure the best way to do this, preferably I'd like to just
     // get the two of these in '/Claimant/:address' and '/Arbiter/:address' but its up for debate
@@ -35,42 +37,70 @@ const hardcoded_claim = {
     token:'0x0000000000000000000000000000000000000004'
 }
 
+const ClaimStateFromStatus = (ruled, settlement_failed) =>{
+    if(ruled){
+        return CLAIM_STATES.RULED
+    } else if (settlement_failed){
+        return CLAIM_STATES.ARBITRATION
+    } else {
+        return CLAIM_STATES.PRE_ARBITRATION
+    }
+}
+
 const ClaimCard = ({userEthAddress, claim}) => {
     
 
     // Set for now
     claim = hardcoded_claim
-    const isSameAddress = sameAddress(userEthAddress)
-    let state, actions;
 
+    let status, actions;
+    status = ClaimStateFromStatus(claim.ruled, claim.settlement_failed)
+    claim.status = status
+
+    const isSameAddress = sameAddress(userEthAddress)
+    
+    // Get the actions by address and state
     if(isSameAddress(claim.claimant)){
-        actions = ClaimantActions(CLAIM_STATES.ARBITRATION)(userEthAddress, claim.stake)
-        console.log(actions)
+        actions = ClaimantActions(status)(userEthAddress, claim.stake)
     } else if (isSameAddress(claim.arbiter)){
-        actions = ArbiterActions(CLAIM_STATES.ARBITRATION)(userEthAddress, claim.stake)
+        actions = ArbiterActions(status)(userEthAddress, claim.stake)
     }
 
     return <ClaimCardView claim={claim} actions={actions}/>
 }
 
 const ClaimCardView = (props) => (
-    <Card alignSelf='center'>
-        <Grid container flexDirection='column' alignItems='center' justifyContent='center' spacing={16}>
+    <Card>
+        <CardHeader title={`Claim ID ${props.claim.id} for ${props.claim.amount} is in ${props.claim.status}`}/>
+        <CardContent>
+        <Grid container flexDirection='column' alignItems='center' justify='space-around' spacing={16}>
             <Grid item>
                 <EthAddressDisplayCard title={'Claimant'} address={props.claim.claimant}/>
             </Grid>
             <Grid item>
-                <EthAddressDisplayCard title={'Data Hash'} address={props.claim.data}/>
+                <EthAddressDisplayCard title={'Claim Data'} address={props.claim.data}/>
             </Grid>
             <Grid item>
                 <EthAddressDisplayCard title={'Arbiter'} address={props.claim.arbiter}/>
             </Grid>
+            <Grid item>
+                <EthAddressDisplayCard title={'On Stake'} address={props.claim.stake}/>
+            </Grid>
         </Grid>
+        <Grid container flexDirection='column' alignItems='center' justify='space-around' spacing={16}>
+            <Grid item>
+                <Typography>Settlements</Typography>
+            </Grid>
+            <Grid item>
+                <Typography>Claim Status</Typography>
+                <Typography>{props.claim.state}</Typography>
+            </Grid>
+        </Grid>
+        </CardContent>
         <CardActions>
             <DialogActionList actions={props.actions}/>
         </CardActions>
     </Card>
 )
-
 
 export default ClaimCard
