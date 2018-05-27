@@ -10,7 +10,8 @@ const GetStakeInfoAtAddress = async (address) => {
         // Check Package.json for configuration
         const request_url = `${BASEURL}${ENDPOINTS.GETSTAKE(address)}`
         console.log("REQUESTURL:", request_url)
-        const stakeInfo = await fetch(request_url, {mode:'no-cors', headers:{'Content-Type':'application/json'}})
+        const stakeInfo = await fetch(request_url)
+        console.log(stakeInfo)
         console.log("RECEIVED RESPONSE", stakeInfo.body)
         const stakeJson = await stakeInfo.json()
 
