@@ -1,8 +1,15 @@
 import React from 'react'
-import Typography from 'material-ui/Typography'
+import Card, {CardHeader, CardContent} from 'material-ui/Card'
+import Typography from "material-ui/Typography";
+
+const NoClaims = props => (
+    <Card>
+    <CardHeader align='center' title="You don't seem to be the arbiter for any ongoing claims" component='h1'/>
+    <CardContent>
+    </CardContent>
+  </Card>
+)
 
 export default (props) => (
-    <Typography variant='headline' component='h2'>
-        Arbiter View
-    </Typography>
+    (props.claims && props.claims.length > 0) ? <NoClaims/> : <NoClaims/> 
 )

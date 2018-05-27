@@ -1,3 +1,7 @@
+/*
+    Configuration file for creating the App Theme.
+*/
+
 import { createMuiTheme, } from 'material-ui/styles'
 
 // Can use this to overwrite the theme of the app

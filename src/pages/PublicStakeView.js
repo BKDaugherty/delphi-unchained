@@ -17,9 +17,9 @@ import StakeCard from '../components/StakeCard'
 
 import PropTypes from 'prop-types'
 
-// Import Application logic functions
-import {GetStakeInfoAtAddress} from '../services/delphi-backend'
+import {Stake_API} from '../services/delphi-backend/API'
 import { drizzleConnect } from 'drizzle-react'
+
 // Styles for this View
 const styles = {
     title: {
@@ -49,8 +49,6 @@ class PublicStakeView extends React.Component {
         this.contracts = context.drizzle.contracts
     }
 
-
-
     state = {
         stakeInfo:null
     }
@@ -61,7 +59,7 @@ class PublicStakeView extends React.Component {
     }
 
     async getData(address){
-        const stakeInfo = await GetStakeInfoAtAddress(address)
+        const stakeInfo = await Stake_API.GetStakeInfoAtAddress(address)
         this.setState({stakeInfo})
     }
 
@@ -99,7 +97,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 PublicStakeView.contextTypes = {
-    drizzle: PropTypes.object
+    drizzle: PropTypes.object,
+    web3:PropTypes.object
 }
 
 

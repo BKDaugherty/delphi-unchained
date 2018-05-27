@@ -7,6 +7,7 @@
     "@material-ui/icons": "^1.0.0-beta.43",
     "drizzle": "^1.1.5",
     "drizzle-react": "^1.1.1",
+    "eslint-config-fbjs": "^2.0.1",
     "eth-block-tracker-es5": "^2.3.2",
     "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.44",

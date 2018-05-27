@@ -1,4 +1,8 @@
-import {ENDPOINTS } from './config'
+/*
+    Holds the JavaScript SDK of interacting with the Delphi API Resource "Stake"
+*/
+
+import {ENDPOINTS } from './../config'
 
 const stake = {
     "staker": "0x627306090abab3a6e1400e9345bc60c78a8bef57",

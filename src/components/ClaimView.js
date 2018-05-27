@@ -29,7 +29,7 @@ const ClaimContent = ({claim}) => (
         <Grid item>
             <Card>
                 <CardHeader title={'Amount'} />
-                <CardContent alignItems='center'>
+                <CardContent>
                     <Typography>{claim.amount}</Typography>
                 </CardContent>
             </Card>

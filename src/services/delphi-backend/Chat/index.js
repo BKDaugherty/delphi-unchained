@@ -1,0 +1,3 @@
+/*
+    Interface for communicating with Chat Portion
+*/
