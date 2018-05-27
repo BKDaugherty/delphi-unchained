@@ -45,16 +45,13 @@ const StyledFooter = styled.footer`
     flex-direction:column;
     align-items:center;
     justify-content:space-around;
-    background-color: #bc986a;
+    background-color: ${props => props.theme.palette.secondary.main};
 `
-
-    // background-color:#BC986A;
-
 
 const FooterLink = styled.a`
     text-decoration:none;
     font-size:small;
-    color:#FBEEC1;
+    color:${props => props.theme.palette.text.disabled};
 
     :hover{
         text-decoration:underline;
@@ -93,7 +90,7 @@ const Footer = (props) => (
 
 const MainLandingCard = CenteredSection.extend`
     padding:1%;
-    background-color:#fff;
+    background-color:${props => props.theme.palette.background.paper};
     width:40%;
     border-radius:3px;
 `
@@ -107,10 +104,10 @@ class LandingPage extends React.Component {
             <div style={{marginTop:100}}/>
             <MainLandingCard>
                 <Title>{"Delphi Unchained"}</Title>
-                    <img src={DelphiTempleImage}/>
-                    <SubTitleBox>
-                            <SubTitle>{"A simple dapp to support a simple mechanism for staking and claims."}</SubTitle>
-                    </SubTitleBox>
+                <img src={DelphiTempleImage}/>
+                <SubTitleBox>
+                        <SubTitle>{"A simple dapp powered by a simple caching layer to support a simple mechanism for staking and claims."}</SubTitle>
+                </SubTitleBox>
             </MainLandingCard>
             <Footer/>
         </div>
