@@ -6,6 +6,7 @@ import Home from '../pages/home'
 import PublicStakeView from '../pages/PublicStakeView'
 import Dashboard from '../pages/dashboard'
 
+const myPage = (props) => <div>Hey IPFS</div>
 
 // Defines the navigation structure of our app
 export default (props) => (
@@ -14,6 +15,7 @@ export default (props) => (
     {/*By use of the ':', we tell react-router that address is a variable*/}
     <Route path="/stake/:address" component={PublicStakeView}/>
     <Route path="/dashboard" component={Dashboard}/>
+    <Route path="/IPFS" component={myPage}/>
 
 </div>
 )
