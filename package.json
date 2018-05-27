@@ -45,5 +45,5 @@
   "devDependencies": {
     "gh-pages": "^1.1.0"
   },
-  "proxy": "http://delphi_api:5000"
+  "proxy": "https://delphi-api.herokuapp.com"
 }

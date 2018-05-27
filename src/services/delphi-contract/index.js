@@ -38,12 +38,6 @@ let EIP = TruffleContract({
 const contracts = [DF, DS, EIP]
 contracts.forEach(contract => contract.setProvider(web3js.currentProvider))
 
-// DF.setProvider(web3js.currentProvider)
-// DS.setProvider(web3js.currentProvider)
-// EIP.setProvider(web3js.currentProvider)
-
-// Export abstractions
-
 export const DelphiStakeFactory = DF
 export const DelphiStake = DS
 export const EIP20 = EIP
