@@ -2,34 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 import {NavLink} from 'react-router-dom'
 import DelphiTempleImage from '../assets/images/DelphiTemple.jpg'
-
-const NavItem = styled(NavLink)`
-    color:black;
-    text-decoration:none;
-    padding:1em;
-
-    :hover{
-        text-decoration:underline;
-    }
-`
-const Navigator = ({links}) => (
-    <StyledNav>
-        {links.map((link, key) => (<NavItem key={key} to={link.to}>{link.label}</NavItem>))}
-    </StyledNav>
-)
-
-const StyledNav = styled.nav`
-    display:flex;
-    flex-direction:row;
-    justify-content:flex-end;
-    marginLeft:3em;
-    marginRight:3em;
-`
+import AppHeader from '../components/AppHeader'
+import {drizzleConnect} from 'drizzle-react'
 
 const Title = styled.h2`
+    color:#659dbd;
+`
+
+const SubTitleBox = styled.div`
+    padding:1.5%;
+    margin:auto;
+    border-radius:5px;
+    background-color:#DAAD86;
+    width:50%;
+    
 `
 
 const SubTitle = styled.p`
+    color:white;
+    text-align:center;
 `
 
 const CenteredSection = styled.section`
@@ -37,35 +28,33 @@ const CenteredSection = styled.section`
     margin:auto;
 `
 
+const StyledHeaderWrapper = styled.header`
+`
+
 const Header = ({links, title, subtitle}) => (
-    <header>
-        <Navigator links={links}/>
-        <CenteredSection>
-            <Title>{title}</Title>
-            <img src={DelphiTempleImage}/>
-            <SubTitle>{subtitle}</SubTitle>
-        </CenteredSection>
-    </header>
+   <AppHeader/>
 )
 
 const StyledFooter = styled.footer`
     position:fixed;
     padding:20px;
-    height:25px;
     width:100%;
     bottom:0;
     left:0;
-    background:#ddd;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-around;
+    background-color: #bc986a;
 `
+
+    // background-color:#BC986A;
+
 
 const FooterLink = styled.a`
     text-decoration:none;
     font-size:small;
-    color:black;
+    color:#FBEEC1;
 
     :hover{
         text-decoration:underline;
@@ -102,20 +91,33 @@ const Footer = (props) => (
     </StyledFooter>
 )
 
+const MainLandingCard = CenteredSection.extend`
+    padding:1%;
+    background-color:#fff;
+    width:40%;
+    border-radius:3px;
+`
 
+//style={{backgroundColor:'#659DBD'}}
 class LandingPage extends React.Component {
-
     render(){
         return (
-        <main>   
-            <Header title={"Delphi Unchained"}
-                subtitle="A simple dapp to support a simple mechanism for staking and claims."
-                links={[{label:'Dashboard', to:'/dashboard'}, {label:'Stake Explorer', to:'/stake'}]}/>
+        <div>   
+            <AppHeader userEthAddress={this.props.userEthAddress}/>
+            <div style={{marginTop:100}}/>
+            <MainLandingCard>
+                <Title>{"Delphi Unchained"}</Title>
+                    <img src={DelphiTempleImage}/>
+                    <SubTitleBox>
+                            <SubTitle>{"A simple dapp to support a simple mechanism for staking and claims."}</SubTitle>
+                    </SubTitleBox>
+            </MainLandingCard>
             <Footer/>
-        </main>
+        </div>
     )
     }
 
 }
+const mapStateToProps = (state) => ({ userEthAddress: state.accounts[0]})
 
-export default LandingPage
+export default drizzleConnect(LandingPage, mapStateToProps)

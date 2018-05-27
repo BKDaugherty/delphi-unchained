@@ -25,7 +25,7 @@ const styles = {
     title: {
         marginBottom: 16,
         fontSize: 18,
-        color: 'black',
+        color:'white'
     },
     toolbar:{
         marginTop:85,

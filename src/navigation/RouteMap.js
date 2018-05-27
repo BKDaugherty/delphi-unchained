@@ -18,12 +18,10 @@ import TestClaim from '../pages/testClaim'
 export default (props) => (
 <div>
     <Route exact path="/" component={LandingPage}/>
-    <Route path="/stake" component={StakeExplorer}/>
+    <Route exact path="/stake" component={StakeExplorer}/>
     {/*By use of the ':', we tell react-router that address is a variable*/}
     <Route path="/stake/:address" component={PublicStakeView}/>
     <Route path="/dashboard" component={Dashboard}/>
     <Route path="/Claim" component={TestClaim}/>
-
-
 </div>
 )
