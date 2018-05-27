@@ -16,20 +16,28 @@ import {
     Typography
   } from "material-ui";
 
-const SwitchRoutes = (props) => (
-  <Switch>
-    {dashboardRoutes.map((prop, key) => {
-      const Component = prop.component
+  import './../../index.css'
 
-      return (
-      <Route exact={prop.exact} 
-        path={prop.path} 
-        component={(properties) => <Component {...properties} userEthAddress={props.userEthAddress} />}
-        key={key}/>
-      )
-    })}  
-  </Switch>
-)
+import ReactCSSTransitionReplace from 'react-css-transition-replace'
+
+const SwitchRoutes = ({location, userEthAddress}) => {
+  return (
+    <ReactCSSTransitionReplace transitionName="cross-fade" 
+      transitionEnterTimeout={1000} 
+      transitionLeaveTimeout={1000}>
+    <Switch key={location.key} location={location}>
+      {dashboardRoutes.map((prop, key) => {
+        const Component = prop.component
+        return (
+        <Route exact={prop.exact} 
+          path={prop.path} 
+          component={(properties) => <Component {...properties} userEthAddress={userEthAddress} />}
+          key={key}/>
+        )
+      })}  
+    </Switch>
+  </ReactCSSTransitionReplace> 
+)}
 
 // Arbitrary...
 const drawerWidth = 240
@@ -81,7 +89,7 @@ const SidebarLink = (props) => (
     </NavLink>)
 
 const ClippedDrawer = (props) => {
-    const { classes, userEthAddress } = props;
+    const { classes, userEthAddress, location } = props;
   
     return (
       <div className={classes.root}>
@@ -102,7 +110,9 @@ const ClippedDrawer = (props) => {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {/* Adds the switch router*/}
-          <SwitchRoutes userEthAddress={userEthAddress}/>
+          
+              <SwitchRoutes location={location} userEthAddress={userEthAddress}/>
+            
         </main>
       </div>
     );
@@ -122,6 +132,7 @@ const mapStateToProps = (state, ownProps) => ({
     drizzleStatus: state.drizzleStatus,
 })
 
+const DrizzledDrawer = drizzleConnect(StyledDrawer, mapStateToProps)
 
-export default drizzleConnect(StyledDrawer, mapStateToProps);
+export default DrizzledDrawer;
   

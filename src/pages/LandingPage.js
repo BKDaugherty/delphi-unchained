@@ -104,7 +104,7 @@ class LandingPage extends React.Component {
             <div style={{marginTop:100}}/>
             <MainLandingCard>
                 <Title>{"Delphi Unchained"}</Title>
-                <img src={DelphiTempleImage}/>
+                <img alt="Image of the Delphi Shrine" src={DelphiTempleImage}/>
                 <SubTitleBox>
                         <SubTitle>{"A simple dapp powered by a simple caching layer to support a simple mechanism for staking and claims."}</SubTitle>
                 </SubTitleBox>

@@ -17,21 +17,6 @@ import { MuiThemeProvider, } from 'material-ui/styles';
 import mui_theme from './styles/mui-theme'
 import { ThemeProvider } from 'styled-components';
 
-const GOLD = "#8D8741"
-const LIGHTBLUE="#659DBD"
-const SALMON = "#DAAD86"
-const BROWN = "#BC986A"
-const FADEDYELLOW="#FBEEC1"
-
-
-const theme = {
-  primary:GOLD,
-  secondary:SALMON,
-  background:LIGHTBLUE,
-  tertiary:FADEDYELLOW,
-  background2:BROWN,
-  paper:'#fff'
-}
 
 class App extends Component {
   render() {

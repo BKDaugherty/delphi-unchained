@@ -5,7 +5,6 @@
  */
 
 import {
-    validationValueToNumber,
     validEthAddress, 
     validInteger, 
     validNumber, 

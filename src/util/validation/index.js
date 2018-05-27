@@ -35,7 +35,6 @@ const ValidatorGenerator = (condition, errorMessage) => ({value, error}) => {
 
 // Transformer for switching the type of the value.
 const ValidatorTransformer = transformer => ({value, error}) => ({value:transformer(value), error})
-const EmptyValidator = ({value, error}) => ({value, error})
 
 // Combines passed in validators into a single validator
 export const CombinedValidator = (...Validators) => ({value, error}) => {

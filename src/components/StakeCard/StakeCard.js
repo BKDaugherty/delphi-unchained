@@ -3,15 +3,12 @@
 import React from 'react'
 import Card, {CardContent, CardActions, CardHeader} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
 
 import PropTypes from 'prop-types'
 
 import {EthAvatarIcon} from '../EthAddressAvatar'
 
 import StakeCardContent from './StakeCardContent'
-import DialogForm from '../DialogForm'
 import DialogActionList from '../DialogActionList'
 
 import {sameAddress} from '../../util'

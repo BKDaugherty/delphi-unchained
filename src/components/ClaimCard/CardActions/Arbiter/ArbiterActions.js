@@ -5,7 +5,7 @@
 
 import CLAIM_STATES from './../ClaimStates'
 import {RuleOnClaim} from './../Actions'
-import {SupplyActionsEthInfo, GenerateActionsFromMap} from './../util'
+import {GenerateActionsFromMap} from './../util'
 
 const ArbiterActionsByState = (claimState) => {
     switch(claimState){

@@ -1,6 +1,5 @@
 import React from 'react'
 import Card, {CardHeader, CardContent} from 'material-ui/Card'
-import Typography from "material-ui/Typography";
 
 const NoClaims = props => (
     <Card>
