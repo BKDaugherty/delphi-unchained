@@ -9,6 +9,7 @@ const GetStakeInfoAtAddress = async (address) => {
         // Proxy Server means we don't need to specify API url or endpoint.
         // Check Package.json for configuration
         const request_url = `${BASEURL}${ENDPOINTS.GETSTAKE(address)}`
+        console.log("REQUESTURL:", request_url)
         const stakeInfo = await fetch(request_url, {mode:'no-cors', headers:{'Content-Type':'application/json'}})
         console.log("RECEIVED RESPONSE", stakeInfo.body)
         const stakeJson = await stakeInfo.json()
