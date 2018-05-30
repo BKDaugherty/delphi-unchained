@@ -33,7 +33,7 @@
     "web3": "^1.0.0-beta.34"
   },
   "scripts": {
-    "dev": "truffle install; mkdir -p src/drizzle/artifacts ; cp -r build/contracts/* src/drizzle/artifacts/ ; react-scripts start",
+    "dev": "truffle install; truffle compile; mkdir -p src/drizzle/artifacts ; cp -r build/contracts/* src/drizzle/artifacts/ ; react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
