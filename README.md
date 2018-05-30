@@ -26,13 +26,15 @@ In order to synchronize our build environments, I would suggest using [Deth](htt
 but I think it will make your life a little easier!
 
 ### Start up
-* `$ docker-compose up deth`
 * `$ git clone https://github.com/BKDaugherty/delphi-unchained`
+* `$ docker-compose up dapp`
 * `$ cd delphi-unchained`
-* `$ yarn install`
-* `$ yarn start`
+* `$ yarn install` -- If this command fails, see below.
+* `$ yarn run dev`
 
-You should now have a development server running on port 3000, and be able to access it from your browser.
+If `$ yarn install` fails due to node-gyp not being installed, change your directory to the directory specified by the error, run `npm install node-gyp`, and then switch back to delphi unchained and run `$ yarn install` again.
+  
+If all goes well, (please PM @BKDaugherty if it does not), you should now have a development server running on port 3000, and be able to access it from your browser.
 
 *You no longer need to run the caching layer, or ganache! When connecting with Metamask, use the Ropsten Test Net! Hit up @c-o-l-o-r or @BKDaugherty for MattCoin to use the actions*
 
