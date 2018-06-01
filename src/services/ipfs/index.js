@@ -14,6 +14,10 @@ export const IPFS_function = async ({message:claimData}) => {
     //currently logging value to verify manually
     console.log(ipfsHash)
 
+    //retrieves the data and logs it to the console
+    var returned = ipfs.cat(ipfsHash)
+    console.log(returned)
+
     //returns a promise
     return (ipfsHash)
 }
