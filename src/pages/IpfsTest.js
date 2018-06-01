@@ -38,7 +38,7 @@ const styles = theme => ({
   },
 });
   
-
+//Renders only a button creating an IPFS hash in the developer console
 class IPFS extends React.Component{
   constructor(props, context){
     super(props);
@@ -48,7 +48,7 @@ class IPFS extends React.Component{
 
 //this is currently an arbitrary value
 state = {
-  data: 'jigybujh',
+  data: 'this should change sometimes',
 
 }
 
@@ -62,11 +62,8 @@ state = {
              Hash It!
           </Button>}
         </Grid>
- 
       </div> )
   }  
-
-  
 }
 
 
