@@ -20,6 +20,10 @@ body {
   opacity: 1;
   transition: opacity 1s ease-in;
 }
+ 
+.cross-fade-height {
+  transition: height .5s ease-in;
+}
 
 /*
   https://www.svgbackgrounds.com/#subtle-prism

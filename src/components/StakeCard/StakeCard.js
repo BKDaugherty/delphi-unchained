@@ -26,7 +26,7 @@ const StakeCardHeader = (props) => (
 // Renders the information on a stake
 const StakeCard = (props) => {
     let { classes, stake , address, userEthAddress} = props
-    const whitelisted_claimants = stake.whitelisted_claimants
+    const whitelist = stake.whitelist
     const token_address = stake.token.address
 
     // Curry those functions
@@ -40,7 +40,7 @@ const StakeCard = (props) => {
     if(addressIs(stake.staker)){
         actions = StakerActions(userEthAddress, address, token_address)
     }
-    else if (whitelisted_claimants.some(addressIs)){
+    else if (whitelist.some(addressIs)){
         actions = WhitelisteeActions(userEthAddress, address)
     } else {
         actions = PublicActions

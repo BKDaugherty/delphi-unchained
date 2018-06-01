@@ -4,21 +4,21 @@
 
 import {ENDPOINTS, BASEURL } from './../config'
 
-const GetStakeInfoAtAddress = async (address) => {
+const GetStakerStakes = async (address) => {
     try {
         // Proxy Server means we don't need to specify API url or endpoint.
         // Check Package.json for configuration
-        let request_url = `${BASEURL}${ENDPOINTS.GETSTAKE(address)}`
+        let request_url = `${BASEURL}${ENDPOINTS.GETSTAKER}`
         // console.log("REQUESTURL:", request_url)
-        const stakeInfo = await fetch(request_url)
+        const StakerStakes = await fetch(request_url)
         // console.log(stakeInfo)
         // console.log("RECEIVED RESPONSE", stakeInfo.body)
-        const stakeJson = await stakeInfo.json()
+        const StakerStakesJSON = await stakeInfo.json()
 
-        return stakeJson.data
+        return StakerStakesJSON.data
     } catch (error) {
         console.error(error)
     }
 }
 
-export default GetStakeInfoAtAddress
+export default GetStakerStakes
