@@ -17,7 +17,6 @@ import {
 
 const ValidateRequiredAddress = CombinedValidator(validEthAddress, validRequired)
 const ValidateRequiredPositiveInteger = CombinedValidator(validRequired, validNumber, validPositive, validInteger)
-console.log(validTimeInTheFuture({value:100}))
 const ValidateRequiredTimeInFuture = CombinedValidator(validRequired, validNumber, validInteger, validTimeInTheFuture )
 
 export const validateWhitelistClaimant = ({claimantAddress, claimantDeadline}) => {
@@ -49,7 +48,7 @@ export const validateIncreaseStakeAmount = ({increaseStakeAmount}) => {
 
 
 export const validateExtendStakeReleaseTime = ({stakeReleaseTime}) => {
-    let errors = {}
+    let errors = {} 
 
     errors.stakeReleaseTime = ValidateRequiredTimeInFuture({value:stakeReleaseTime}).error
 

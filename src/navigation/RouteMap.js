@@ -10,6 +10,7 @@ import Home from '../pages/home'
 import PublicStakeView from '../pages/PublicStakeView'
 import Dashboard from '../pages/dashboard'
 import IPFS from '../pages/IpfsTest'
+import TestClaim from '../pages/testClaim'
 
 
 // Defines the navigation structure of our app
@@ -20,5 +21,8 @@ export default (props) => (
     <Route path="/stake/:address" component={PublicStakeView}/>
     <Route path="/dashboard" component={Dashboard}/>    
     <Route path="/IPFS" component={IPFS}/>
+    <Route path="/Claim" component={TestClaim}/>
+
+
 </div>
 )

@@ -33,17 +33,17 @@
     "web3": "^1.0.0-beta.34"
   },
   "scripts": {
-    "dev": "truffle migrate --network=coverage; cp -r /usr/src/app/delphi-unchained/build/contracts/* /usr/src/app/delphi-unchained/src/artifacts/ ;react-scripts start",
+    "dev": "truffle install; truffle compile; mkdir -p src/drizzle/artifacts ; cp -r build/contracts/* src/drizzle/artifacts/ ; react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "contract": "truffle migrate --network=coverage; mkdir -p src/drizzle/artifacts ; cp build/contracts/* src/drizzle/artifacts/"
+    "contract": "truffle migrate--network=coverage ; mkdir -p src/drizzle/artifacts ; cp build/contracts/* src/drizzle/artifacts/"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0"
   },
-  "proxy": "http://delphi_api:5000"
+  "proxy": "https://delphi-api.herokuapp.com"
 }

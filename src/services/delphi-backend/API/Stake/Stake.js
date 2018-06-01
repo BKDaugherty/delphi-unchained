@@ -2,8 +2,9 @@
     Holds the JavaScript SDK of interacting with the Delphi API Resource "Stake"
 */
 
-import {ENDPOINTS } from './../config'
+import {ENDPOINTS, BASEURL } from './../config'
 
+// Test object
 const stake = {
     "staker": "0x627306090abab3a6e1400e9345bc60c78a8bef57",
     "value": 100,
@@ -72,7 +73,15 @@ const GetStakeInfoAtAddress = async (address) => {
         // const request_url = `${ENDPOINTS.GETSTAKE(address)}`
         // const stakeInfo = await fetch(request_url, {mode:'no-cors'})
         // const stakeJson = await stakeInfo.json()
-        return stake
+        //return stake
+        const request_url = `${BASEURL}${ENDPOINTS.GETSTAKE(address)}`
+        // console.log("REQUESTURL:", request_url)
+        const stakeInfo = await fetch(request_url)
+        // console.log(stakeInfo)
+        // console.log("RECEIVED RESPONSE", stakeInfo.body)
+        const stakeJson = await stakeInfo.json()
+
+        return stakeJson.data
     } catch (error) {
         console.error(error)
     }

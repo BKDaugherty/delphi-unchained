@@ -10,10 +10,9 @@ import PropTypes from 'prop-types'
 
 import {EthAvatarIcon} from '../EthAddressAvatar'
 
-
-
 import StakeCardContent from './StakeCardContent'
 import DialogForm from '../DialogForm'
+import DialogActionList from '../DialogActionList'
 
 import {sameAddress} from '../../util'
 import StakerActions from './CardActions/StakerActions'
@@ -57,19 +56,7 @@ const StakeCard = (props) => {
                 <StakeCardContent classes={classes} stake={stake} />
             </CardContent>
             <CardActions>
-                <Grid container spacing={16}>
-                    {actions ? 
-                        actions.map(
-                            (action, key) => (
-                                <Grid item key={key}> 
-                                    { action.dialogProps ? 
-                                        <DialogForm {...action}/> 
-                                        : <Button {...action}>{action.label}</Button> 
-                                    } 
-                                </Grid> )
-                            ) 
-                    : null }
-                </Grid>
+                <DialogActionList actions={actions}/>
             </CardActions>
         </Card>
     )

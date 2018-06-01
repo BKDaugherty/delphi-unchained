@@ -3,7 +3,6 @@
 import { all, fork } from 'redux-saga/effects'
 import { drizzleSagas } from 'drizzle'
 export const drizzleOptions = {
-        //contracts:[DelphiStakeFactory],
         polls: {
           accounts: 3000,
         //   blocks: interval
@@ -11,7 +10,7 @@ export const drizzleOptions = {
         web3: {
           fallback: {
             type:'ws',
-            url:'ws://ganache:8545'
+            url:'wss://ropsten.infura.io/ws/U6bpkteiO0xMIuYeiHzk'
           }
         }
       }

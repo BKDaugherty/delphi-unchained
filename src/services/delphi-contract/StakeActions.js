@@ -34,5 +34,5 @@ export const openClaim = (ethAddress, stakeAddress) => async ({claimAmount, clai
     const stake = await DelphiStake.at(stakeAddress)
     const hash = await IPFS_function({message: claimData})
     const method = claimSkipSettlement ? stake.openClaimWithoutSettlement : stake.openClaim
-    return method(ethAddress, claimAmount, claimFee, claimData, {from:ethAddress})
+    return method(claimAmount, claimFee, claimData, {from:ethAddress})
 }

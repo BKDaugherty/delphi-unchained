@@ -5,6 +5,7 @@
 
 import {openClaim} from '../../../services/delphi-contract/StakeActions'
 import {validateOpenClaim} from './WhitelisteeCardFormValidation'
+
 const WhitelisteeActions = (ethAddress, stakeAddress) => [
     {
         label:'Open a Claim',
