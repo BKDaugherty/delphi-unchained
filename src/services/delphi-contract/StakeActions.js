@@ -1,4 +1,6 @@
 import {DelphiStake, EIP20} from '../../services/delphi-contract'
+import IPFS from '../../pages/IpfsTest';
+import {IPFS_function} from '../../services/ipfs/index'
 
 // Staker Actions
 export const whitelistClaimant = (ethAddress, stakeAddress) => async ({claimantAddress, claimantDeadline}) => {
@@ -27,10 +29,10 @@ export const withdrawStake = (ethAddress, stakeAddress) => async () => {
     return stake.withdrawStake({from:ethAddress})
 }
 
-// Claimant Actions
 
 export const openClaim = (ethAddress, stakeAddress) => async ({claimAmount, claimFee, claimData, claimSkipSettlement}) => {
     const stake = await DelphiStake.at(stakeAddress)
+    const hash = await IPFS_function({message: claimData})
     const method = claimSkipSettlement ? stake.openClaimWithoutSettlement : stake.openClaim
     return method(ethAddress, claimAmount, claimFee, claimData, {from:ethAddress})
 }

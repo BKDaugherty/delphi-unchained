@@ -1,3 +1,4 @@
+
 // Must import react in every module
 import React from 'react'
 
@@ -5,6 +6,7 @@ import React from 'react'
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
+//import {Input} from 'material-ui/core/Input'
 
 // Import our custom components
 import AppHeader from '../components/AppHeader'
@@ -15,55 +17,57 @@ import PropTypes from 'prop-types'
 import {Stake_API} from '../services/delphi-backend/API'
 import { drizzleConnect } from 'drizzle-react'
 
-//const myPage = (props) => <div>Hey IPFS</div>
 
+//imports the function that does the hashing
+import {IPFS_function} from './../services/ipfs/index'
 
+//Materials UI to make the button more attractive
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  input: {
+    margin: theme.spacing.unit,
+  },
+});
   
-
 
 class IPFS extends React.Component{
   constructor(props, context){
     super(props);
     this.render = this.render.bind(this)
-    this.HashData = this.HashData.bind(this)
+    this.IPFS_function = IPFS_function.bind(this)
   }
 
-  state ={
-    ipfsHash:''
-  }
+//this is currently an arbitrary value
+state = {
+  data: 'jigybujh',
 
-  async HashData(){
-    //var ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
+}
 
-      const data = JSON.stringify({
-        name: "JSON Statehem",
-        link0: "stackexchange.com",
-        link1: "github.com",
-        link2: "myfacebook.com"
-      })
-    
-      const ipfsHash = await ipfs.add(data)
-    
-      this.setState({ipfsHash})
-
-      console.log(ipfsHash)
-      console.log(typeof(ipfsHash))
-
-      return (ipfsHash)
-    
-  }
-
-
+//render takes advantage of the IPFS(message:data) function
   render(){
-    var string = this.HashData()
-    string = toString(string)
-    console.log(typeof(string) + " should be string")
     return ( 
-      <div> ipfs pls work {this.state.ipfsHash}</div> ) //{this.HashData()}
-    //<div> ipfs test: {HashData()} </div>)
+      <div>
+        <Grid item>
+          {<Button variant='raised' color='secondary' onClick={
+            () => IPFS_function({message:this.state.data})}>
+             Hash It!
+          </Button>}
+        </Grid>
+ 
+      </div> )
   }  
 
   
-}    
+}
+
 
 export default IPFS
