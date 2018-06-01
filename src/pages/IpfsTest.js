@@ -16,43 +16,51 @@ import {Stake_API} from '../services/delphi-backend/API'
 import { drizzleConnect } from 'drizzle-react'
 
 //const myPage = (props) => <div>Hey IPFS</div>
-const ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
-async function test() {
-    const data = JSON.stringify({
-      name: "JSON Statehem",
-      link0: "stackexchange.com",
-      link1: "github.com",
-      link2: "myfacebook.com"
-    })
-  
-    const ipfsHash = await ipfs.add(data)
-    //const instance = await MyContract.deployed()
-  
-    //await instance.setHash.sendTransaction(ipfsHash)
-  
-    //let returnedHash = await instance.ipfsHash.call()
-  
-    console.log(ipfsHash)
-    //console.log(returnedHash)
-    
-    //console.log(JSON.parse(await ipfs.cat(returnedHash)))
-  
-  }
+
+
   
 
 
 class IPFS extends React.Component{
   constructor(props, context){
-    super(props)
+    super(props);
     this.render = this.render.bind(this)
-    //this.getData = this.getData.bind(this)
-    //this.contracts = context.drizzle.contracts
+    this.HashData = this.HashData.bind(this)
   }
 
-  render(){
-    test()
+  state ={
+    ipfsHash:''
+  }
 
-    return (<div> ipfs test </div>)
+  async HashData(){
+    //var ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
+
+      const data = JSON.stringify({
+        name: "JSON Statehem",
+        link0: "stackexchange.com",
+        link1: "github.com",
+        link2: "myfacebook.com"
+      })
+    
+      const ipfsHash = await ipfs.add(data)
+    
+      this.setState({ipfsHash})
+
+      console.log(ipfsHash)
+      console.log(typeof(ipfsHash))
+
+      return (ipfsHash)
+    
+  }
+
+
+  render(){
+    var string = this.HashData()
+    string = toString(string)
+    console.log(typeof(string) + " should be string")
+    return ( 
+      <div> ipfs pls work {this.state.ipfsHash}</div> ) //{this.HashData()}
+    //<div> ipfs test: {HashData()} </div>)
   }  
 
   
