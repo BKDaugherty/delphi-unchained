@@ -3,19 +3,11 @@
   Resource "Stake"
 */
 
-import GetStakeInfoAtAddress from './Stake'
-
-const EthAddressRegExp = /^0x[0-9A-Fa-f]{40}$/
-
-expect.extend({
-  toBeEthAddress(received){
-    const pass = received.match(/^0x[0-9A-Fa-f]{40}$/)
-    
-  }
-})
+import DelphiAPI from '../index'
+import {EthAddressRegExp} from './constants'
 
 test('Should return a stake', async () => {
-    const result = await GetStakeInfoAtAddress("0xD5D93240afcB6fb8Da6236B8E22F2EBa4106f25F")
+    const result = await DelphiAPI.GetStake("0xD5D93240afcB6fb8Da6236B8E22F2EBa4106f25F")
     expect(result).toEqual(expect.objectContaining({
       staker:expect.stringMatching(EthAddressRegExp),
       value:expect.anything(),

@@ -1,8 +1,12 @@
 /* Module Export of API */
 
-// import Address from './Address'
-// import Arbiter from './Arbiter'
-// import Claim from './Claim'
-// import Claimant from './Claimant'
-export {default as Stake_API} from './Stake'
-// import Staker from './Staker'
+import {DelphiAPIGetRequest} from './common'
+import {ENDPOINTS} from './config'
+
+export default {
+    GetArbiter:DelphiAPIGetRequest(ENDPOINTS.ARBITER),
+    GetClaimant:DelphiAPIGetRequest(ENDPOINTS.CLAIMANT),
+    GetStake:DelphiAPIGetRequest(ENDPOINTS.STAKE),
+    GetStaker:DelphiAPIGetRequest(ENDPOINTS.STAKER),
+    GetWhitelistee:DelphiAPIGetRequest(ENDPOINTS.WHITELISTEE)
+}
