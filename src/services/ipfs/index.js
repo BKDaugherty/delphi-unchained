@@ -2,7 +2,7 @@
 //Takes an object and returns a hash
 
 import React from 'react'
-/*
+
 export const IPFS_function = async ({message:claimData}) => {
 
     //required to connect to the IPFS network
@@ -26,9 +26,9 @@ export const IPFS_function = async ({message:claimData}) => {
     //returns a promise
     return (ipfsHash)
     
-}*/
+}
 
-export const IPFS_function = async ({message:claimData}) => {
+/*export const IPFS_function = async ({message:claimData}) => {
     var ipfsAPI = require('ipfs-api')
 
     // connect to ipfs daemon API server
@@ -43,4 +43,4 @@ export const IPFS_function = async ({message:claimData}) => {
     // or specifying a specific API path
     //ar ipfs = ipfsAPI({host: '1.1.1.1', port: '80', 'api-path': '/ipfs/api/v0'})
 
-}
+}*/
