@@ -1,25 +1,7 @@
 // Must import react in every module
 import React from 'react'
 
-// Import the pieces of Material-UI we need
-import { withStyles } from 'material-ui/styles'
-import Grid from 'material-ui/Grid'
-import Button from 'material-ui/Button'
-
-// Import our custom components
-import AppHeader from '../components/AppHeader'
-import StakeCard from '../components/StakeCard'
-
-import PropTypes from 'prop-types'
-
-import {Stake_API} from '../services/delphi-backend/API'
-import { drizzleConnect } from 'drizzle-react'
-
 //const myPage = (props) => <div>Hey IPFS</div>
-
-
-  
-
 
 class IPFS extends React.Component{
   constructor(props, context){
@@ -33,7 +15,7 @@ class IPFS extends React.Component{
   }
 
   async HashData(){
-    //var ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
+    var ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
 
       const data = JSON.stringify({
         name: "JSON Statehem",
