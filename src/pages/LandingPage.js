@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {NavLink} from 'react-router-dom'
 import DelphiTempleImage from '../assets/images/DelphiTemple.jpg'
 import AppHeader from '../components/AppHeader'
 import {drizzleConnect} from 'drizzle-react'
@@ -28,13 +27,6 @@ const CenteredSection = styled.section`
     margin:auto;
 `
 
-const StyledHeaderWrapper = styled.header`
-`
-
-const Header = ({links, title, subtitle}) => (
-   <AppHeader/>
-)
-
 const StyledFooter = styled.footer`
     position:fixed;
     padding:20px;
@@ -57,16 +49,6 @@ const FooterLink = styled.a`
         text-decoration:underline;
     }
 `
-
-const LinkContainer = styled.div`
-    display:flex;
-    flex-direction:column;
-    text-direction:center;
-    align-items:center;
-    justify-content:center;
-`
-
-
 
 const FooterLinkContainer = styled.section`
     text-align:center;
@@ -104,7 +86,7 @@ class LandingPage extends React.Component {
             <div style={{marginTop:100}}/>
             <MainLandingCard>
                 <Title>{"Delphi Unchained"}</Title>
-                <img alt="Image of the Delphi Shrine" src={DelphiTempleImage}/>
+                <img alt="The Delphi Shrine" src={DelphiTempleImage}/>
                 <SubTitleBox>
                         <SubTitle>{"A simple dapp powered by a simple caching layer to support a simple mechanism for staking and claims."}</SubTitle>
                 </SubTitleBox>

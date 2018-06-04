@@ -2,9 +2,12 @@
  * Defines the actions that a claimant can perform on a claim.
  */
 
-import CLAIM_STATES from './../ClaimStates'
-import {AcceptSettlement, IncreaseClaimFee, ProposeSettlement, SettlementFailed } from './../Actions'
-import {GenerateActionsFromMap} from './../util'
+import CLAIM_STATES from './ClaimStates'
+import AcceptSettlement from './../../DialogForms/AcceptSettlement'
+import IncreaseClaimFee from './../../DialogForms/IncreaseClaimFee'
+import ProposeSettlement from './../../DialogForms/ProposeSettlement'
+import SettlementFailed from './../../DialogForms/SettlementFailed'
+import {GenerateActionsFromMap} from './util'
 
 const PreArbitrationClaimActions = [ProposeSettlement, SettlementFailed]
 const PreArbitrationSettlementByStakerClaimActions = [AcceptSettlement, SettlementFailed]

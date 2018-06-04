@@ -10,10 +10,10 @@ import ClaimView from '../ClaimView'
 const StakeCardContent = (props) => {
     const {stake} = props
     const claims_list = stake.claims
-    const whitelisted_claimants = stake.whitelisted_claimants
+    const whitelist = stake.whitelist
     const stake_deadline = new Date(parseInt(1000 * stake.claim_deadline, 10))
     return (
-    <div>
+    <Grid container>
         <Grid direction='row' spacing={24} container> 
             <Grid item>
                 <EthAddressDisplayCard title={"Staker"} address={stake.staker}/>
@@ -32,7 +32,7 @@ const StakeCardContent = (props) => {
             </Grid>
         </Grid>
         <Grid direction='row' container spacing={24}>
-            <Grid sm={6} md={6} item>
+            <Grid sm={6} md={6} item zeroMinWidth>
                 <Typography variant='headline' component='h3' color="textSecondary">
                     Claims
                 </Typography>
@@ -42,11 +42,10 @@ const StakeCardContent = (props) => {
                 <Typography variant='headline' component='h3' color="textSecondary">
                     Whitelisted Claimants
                 </Typography>
-                {whitelisted_claimants.length > 0 ? whitelisted_claimants.map(addr => <Grid item key={`whitelisted-claimant-${addr}`}><EthAvatarIcon address={addr}/></Grid>) : null}
+                {whitelist.length > 0 ? whitelist.map(addr => <Grid item key={`whitelisted-claimant-${addr}`}><EthAvatarIcon address={addr}/></Grid>) : null}
             </Grid>
         </Grid>
-    </div>
-
+        </Grid>
 )}
 
 export default StakeCardContent

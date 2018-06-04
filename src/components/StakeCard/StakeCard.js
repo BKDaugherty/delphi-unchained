@@ -16,6 +16,8 @@ import StakerActions from './CardActions/StakerActions'
 import WhitelisteeActions from './CardActions/WhitelisteeActions'
 import PublicActions from './CardActions/PublicActions'
 
+import {drizzleConnect} from 'drizzle-react'
+
 const StakeCardHeader = (props) => (
     <CardHeader
         title={<Typography variant='headline' component='h2'>Stake at Address : {props.address}</Typography>}
@@ -64,4 +66,9 @@ StakeCard.propTypes = {
     stake: PropTypes.object.isRequired,
 }
 
-export default StakeCard
+const mapEthAddressToProps = (state, ownProps) => ({
+    ...ownProps,
+    userEthAddress:state.accounts[0]
+})
+
+export default drizzleConnect(StakeCard, mapEthAddressToProps)
