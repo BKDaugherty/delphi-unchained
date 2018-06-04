@@ -35,7 +35,6 @@ const ValidatorGenerator = (condition, errorMessage) => ({value, error}) => {
 
 // Transformer for switching the type of the value.
 const ValidatorTransformer = transformer => ({value, error}) => ({value:transformer(value), error})
-const EmptyValidator = ({value, error}) => ({value, error})
 
 // Combines passed in validators into a single validator
 export const CombinedValidator = (...Validators) => ({value, error}) => {
@@ -49,17 +48,6 @@ export const CombinedValidator = (...Validators) => ({value, error}) => {
     return {value, error}
 }
 
-const combine2Validators = (valid1, valid2) => {
-    return valid1(valid2)
-}
-
-// const combineNValidators = (first, second, ...rest) => {
-//     if(!second) return first
-//     else return combineNValidators(combine2Validators(first, second), ...rest)
-// }
-
-// Something like this for combination? ^^^
-
 // Validatiors for common conditions
 export const validRequired = ValidatorGenerator(isNull, Errors.IsRequired)
 export const validNumber = ValidatorGenerator(value => isNaN(Number(value)), Errors.IsNumber)
@@ -69,6 +57,11 @@ export const validTimeInTheFuture = ValidatorGenerator( value => isInThePast((Nu
 export const validEthAddress = ValidatorGenerator(isInvalidEthereumAddress, Errors.IsEthereumAddress)
 export const validationValueToNumber = ValidatorTransformer(Number)
 
+
+export const ValidateRequiredAddress = CombinedValidator(validEthAddress, validRequired)
+export const ValidateRequiredPositiveInteger = CombinedValidator(validRequired, validNumber, validPositive, validInteger)
+export const ValidateRequiredPositiveNumber = CombinedValidator(validRequired, validNumber, validPositive)
+export const ValidateRequiredTimeInFuture = CombinedValidator(validRequired, validNumber, validInteger, validTimeInTheFuture )
 
 
 

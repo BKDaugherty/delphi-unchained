@@ -3,9 +3,9 @@
  * Defines the actions that an arbiter can perform on a claim
  */
 
-import CLAIM_STATES from './../ClaimStates'
-import {RuleOnClaim} from './../Actions'
-import {SupplyActionsEthInfo, GenerateActionsFromMap} from './../util'
+import CLAIM_STATES from './ClaimStates'
+import RuleOnClaim from './../../DialogForms/RuleOnClaim'
+import {GenerateActionsFromMap} from './util'
 
 const ArbiterActionsByState = (claimState) => {
     switch(claimState){

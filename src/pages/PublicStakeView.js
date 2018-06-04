@@ -17,7 +17,7 @@ import StakeCard from '../components/StakeCard'
 
 import PropTypes from 'prop-types'
 
-import {Stake_API} from '../services/delphi-backend/API'
+import DelphiAPI from '../services/delphi-backend/API'
 import { drizzleConnect } from 'drizzle-react'
 
 // Styles for this View
@@ -25,7 +25,7 @@ const styles = {
     title: {
         marginBottom: 16,
         fontSize: 18,
-        color: 'black',
+        color:'white'
     },
     toolbar:{
         marginTop:85,
@@ -59,7 +59,7 @@ class PublicStakeView extends React.Component {
     }
 
     async getData(address){
-        const stakeInfo = await Stake_API.GetStakeInfoAtAddress(address)
+        const stakeInfo = await DelphiAPI.GetStake(address)
         this.setState({stakeInfo})
     }
 

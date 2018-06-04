@@ -30,6 +30,9 @@ const styles = theme => ({
         padding:10,
         margin:20,
     },
+    title:{
+        color:'white'
+    },
     fieldContainer:{
         paddingLeft:theme.spacing.unit * 2,
         paddingRight:theme.spacing.unit * 2
@@ -50,7 +53,7 @@ const styles = theme => ({
     }
 });
 
-class Home extends React.Component {
+class StakeExplorer extends React.Component {
 
     constructor(props){
         super(props)
@@ -91,7 +94,7 @@ class Home extends React.Component {
             <AppHeader userEthAddress={userEthAddress}/>
             <Grid justify='center' direction='column' alignItems='center' container spacing={24}>
                 <Grid item>
-                <Typography variant="headline" component="h3">
+                <Typography className={classes.title} variant="headline" component="h3">
                     Delphi Stake Explorer
                 </Typography>
                 </Grid>
@@ -125,4 +128,4 @@ class Home extends React.Component {
 // Connect our component to the Redux Store using Drizzle
 const mapStateToProps = (state) => ({ userEthAddress: state.accounts[0]})
 
-export default drizzleConnect(withStyles(styles)(Home), mapStateToProps)
+export default drizzleConnect(withStyles(styles)(StakeExplorer), mapStateToProps)
