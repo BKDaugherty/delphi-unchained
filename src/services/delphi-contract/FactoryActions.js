@@ -8,8 +8,6 @@ export const createDelphiStake = (ethAddress, factoryAddress) => async ({value, 
     const factory = await DelphiStakeFactory.at(factoryAddress)
     const tokenInstance = await EIP20.at(token)
     const tokenResult = await tokenInstance.approve(factoryAddress, value, {from:ethAddress})
-    console.log(tokenResult)
     const result = factory.createDelphiStake(value,token,minimumFee,data, stakeReleaseTime,arbiter, {from:ethAddress})
-    console.log(await result)
     return result
 }

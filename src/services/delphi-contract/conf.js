@@ -8,4 +8,4 @@ const factoryAddress = {
   rinkeby: '0x5751a4a918435b0ae87f1f28308597baa729d5c7'
 }
 
-export const FACTORYADDRESS = factoryAddress[process.env.ETH_NETWORK]
+export const FACTORYADDRESS = factoryAddress[process.env.REACT_APP_ETH_NETWORK]
