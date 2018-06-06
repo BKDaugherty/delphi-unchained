@@ -1,15 +1,36 @@
 import React from 'react'
-import Card, {CardHeader, CardContent} from 'material-ui/Card'
-import Typography from "material-ui/Typography";
+import NoItems from '../../../components/NoItems'
+import ClaimFeed from '../../../components/ClaimFeed'
+import DelphiAPI from '../../../services/delphi-backend/API'
 
-const NoClaims = props => (
-    <Card>
-    <CardHeader align='center' title="You don't seem to be the arbiter for any ongoing claims" component='h1'/>
-    <CardContent>
-    </CardContent>
-  </Card>
-)
+const NoClaims = () => <NoItems title={"You don't seem to be the arbiter on any outgoing claims"}/>
 
-export default (props) => (
-    (props.claims && props.claims.length > 0) ? <NoClaims/> : <NoClaims/> 
-)
+class ArbiterView extends React.Component{
+    state={
+        claims:[]
+    }
+
+    async loadClaims(){
+        const claims = await DelphiAPI.GetArbiter(this.props.userEthAddress)
+
+        if(claims){
+            this.setState({claims:claims})
+        } else {
+            this.setState({claims:[]})
+        }
+    }
+
+    componentDidMount(){
+        this.loadClaims()
+    }
+
+    render(){
+        const {claims} = this.props
+        return (
+            (claims && claims.length > 0) ? <ClaimFeed claims={claims}/> : <NoClaims/> 
+        )
+    }
+}
+
+
+export default ArbiterView

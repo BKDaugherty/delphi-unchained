@@ -17,15 +17,17 @@ import StakeCard from '../components/StakeCard'
 
 import PropTypes from 'prop-types'
 
-import {Stake_API} from '../services/delphi-backend/API'
+import DelphiAPI from '../services/delphi-backend/API'
 import { drizzleConnect } from 'drizzle-react'
+
+import NoItems from '../components/NoItems'
 
 // Styles for this View
 const styles = {
     title: {
         marginBottom: 16,
         fontSize: 18,
-        color: 'black',
+        color:'white'
     },
     toolbar:{
         marginTop:85,
@@ -59,7 +61,7 @@ class PublicStakeView extends React.Component {
     }
 
     async getData(address){
-        const stakeInfo = await Stake_API.GetStakeInfoAtAddress(address)
+        const stakeInfo = await DelphiAPI.GetStake(address)
         this.setState({stakeInfo})
     }
 
@@ -77,7 +79,8 @@ class PublicStakeView extends React.Component {
                 {/* Conditionally render the stake*/}
                 <Grid container direction='column' justify='center' alignItems='center' spacing={16}>
                     <Grid item>
-                        {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contracts={this.contracts} userEthAddress={userEthAddress}/> : null}
+                        {this.state.stakeInfo ? <StakeCard className={classes.root} stake={this.state.stakeInfo} classes={classes} address={match.params.address} contracts={this.contracts} userEthAddress={userEthAddress}/> : 
+                        <NoItems title={`There doesn't seem to be a stake at address ${match.params.address}`}/>}
                     </Grid>
                     <Grid item>
                         {<Button variant='raised' color='secondary' onClick={() => this.getData(match.params.address)}>

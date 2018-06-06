@@ -4,11 +4,6 @@
 
 import {DelphiStake, EIP20} from '../../services/delphi-contract'
 
-// Prereqs from Solidity
-// validClaimID(_claimId)
-// claimNotRuled(_claimId)
-// settlementDidFail(_claimId)
-
 export const increaseClaimFee = (ethAddress, stakeAddress, tokenAddress) => async ({claimId, amount}) => {
     const stake = await DelphiStake.at(stakeAddress)
     const token = await EIP20.at(tokenAddress)
@@ -33,5 +28,5 @@ export const settlementFailed = (ethAddress, stakeAddress) => async ({claimId}) 
 
 export const ruleOnClaim = (ethAddress, stakeAddress) => async ({claimId, ruling}) => {
     const stake = await DelphiStake.at(stakeAddress)
-    return stakeAddress.ruleOnClaim(claimId, ruling, {from:ethAddress})
+    return stake.ruleOnClaim(claimId, ruling, {from:ethAddress})
 }

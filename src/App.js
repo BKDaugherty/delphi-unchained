@@ -15,19 +15,23 @@ import {drizzleOptions} from './drizzle'
 
 import { MuiThemeProvider, } from 'material-ui/styles';
 import mui_theme from './styles/mui-theme'
+import { ThemeProvider } from 'styled-components';
+
 
 class App extends Component {
   render() {
     return (
-      <DrizzleProvider options={drizzleOptions} store={store}>
-        <Provider store={store}>
-          <ConnectedRouter basename={process.env.PUBLIC_URL} history={history}>
-            <MuiThemeProvider theme={mui_theme}>
-              <RouteMap/>
-            </MuiThemeProvider>
-          </ConnectedRouter>
-          </Provider>    
-      </DrizzleProvider>
+      <ThemeProvider theme={mui_theme}>
+        <DrizzleProvider options={drizzleOptions} store={store}>
+          <Provider store={store}>
+            <ConnectedRouter basename={process.env.PUBLIC_URL} history={history}>
+              <MuiThemeProvider theme={mui_theme}>
+                <RouteMap/>
+              </MuiThemeProvider>
+            </ConnectedRouter>
+            </Provider>    
+        </DrizzleProvider>
+      </ThemeProvider>
     );
   }
 }

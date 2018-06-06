@@ -3,21 +3,20 @@
 import React from 'react'
 import Card, {CardContent, CardActions, CardHeader} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
 
 import PropTypes from 'prop-types'
 
 import {EthAvatarIcon} from '../EthAddressAvatar'
 
 import StakeCardContent from './StakeCardContent'
-import DialogForm from '../DialogForm'
 import DialogActionList from '../DialogActionList'
 
 import {sameAddress} from '../../util'
 import StakerActions from './CardActions/StakerActions'
 import WhitelisteeActions from './CardActions/WhitelisteeActions'
 import PublicActions from './CardActions/PublicActions'
+
+import {drizzleConnect} from 'drizzle-react'
 
 const StakeCardHeader = (props) => (
     <CardHeader
@@ -28,8 +27,9 @@ const StakeCardHeader = (props) => (
 
 // Renders the information on a stake
 const StakeCard = (props) => {
-    let { classes, stake , address, userEthAddress} = props
-    const whitelisted_claimants = stake.whitelisted_claimants
+    let { classes, stake, userEthAddress} = props
+    const address = stake.address
+    const whitelist = stake.whitelist
     const token_address = stake.token.address
 
     // Curry those functions
@@ -43,7 +43,7 @@ const StakeCard = (props) => {
     if(addressIs(stake.staker)){
         actions = StakerActions(userEthAddress, address, token_address)
     }
-    else if (whitelisted_claimants.some(addressIs)){
+    else if (whitelist.some(addressIs)){
         actions = WhitelisteeActions(userEthAddress, address)
     } else {
         actions = PublicActions
@@ -66,4 +66,9 @@ StakeCard.propTypes = {
     stake: PropTypes.object.isRequired,
 }
 
-export default StakeCard
+const mapEthAddressToProps = (state, ownProps) => ({
+    ...ownProps,
+    userEthAddress:state.accounts[0]
+})
+
+export default drizzleConnect(StakeCard, mapEthAddressToProps)
