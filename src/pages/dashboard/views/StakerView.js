@@ -3,12 +3,12 @@ import AddIcon from '@material-ui/icons/Add'
 import Button from 'material-ui/Button'
 import DialogForm from '../../../components/DialogForm'
 import { withStyles } from 'material-ui'
-import {FACTORYADDRESS} from '../../../services/delphi-contract/conf'
 
 import NoItems from '../../../components/NoItems'
 import StakeFeed from '../../../components/StakeFeed'
 import CreateDelphiStakeForm from '../../../components/DialogForms/CreateDelphiStake'
 import DelphiAPI from '../../../services/delphi-backend/API'
+import {connect} from 'react-redux'
 
 const AddButton = props => (
   <Button {...props} variant='fab' color='primary' aria-label='add' className={props.classes.absoluteButton}>
@@ -53,7 +53,7 @@ class StakerView extends React.Component{
   
   render = () => {
     
-    const addAction = CreateDelphiStakeForm(this.props.userEthAddress, FACTORYADDRESS)
+    const addAction = CreateDelphiStakeForm(this.props.userEthAddress, this.props.network)
     return (<div>
       {this.state.stakes.length === 0? <NoStakesView/> : <StakeFeed stakes={this.state.stakes}/>}
       <DialogForm ButtonComponent={StyledAddButton} dialogProps={addAction} />
@@ -63,6 +63,12 @@ class StakerView extends React.Component{
   
 }
 
+const mapStateToProps = (state, ownProps) => ({
+  ...ownProps,
+  network:state.m_web3.network
+})
+
+
 const StyledStakerView = (StakerView)
 
-export default StyledStakerView
+export default connect(mapStateToProps)(StyledStakerView)

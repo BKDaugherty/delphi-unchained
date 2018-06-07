@@ -1,8 +1,5 @@
 //IPFS function
 //Takes an object and returns a hash
-
-import React from 'react'
-
 export const IPFS_function = async ({message:claimData}) => {
 
     //required to connect to the IPFS network
