@@ -1,0 +1,3 @@
+[submodule "reduxAsyncExample"]
+	path = reduxAsyncExample
+	url = git@github.com:WinglessPegasus/reduxAsyncExample.git
