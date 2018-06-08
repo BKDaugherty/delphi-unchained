@@ -10,15 +10,15 @@ const RuleOnClaim = (ethAddress, stakeAddress) => ({
         validate:validateRuleOnClaim,  
         fields:[
             {
-                type:'number',
+                type:'select',
                 label:'Ruling',
                 name:'ruling',
-                // menu_options:[
-                //     {value:0, label:'Justified'},
-                //     {value:1, label:'Not Justified'},
-                //     {value:2, label:'Collusive'},
-                //     {value:3, label:'Inconclusive'}
-                // ]
+                menu_options:[
+                    {value:0, label:'Justified'},
+                    {value:1, label:'Not Justified'},
+                    {value:2, label:'Collusive'},
+                    {value:3, label:'Inconclusive'}
+                ]
             },
             {
                 type:'number',
