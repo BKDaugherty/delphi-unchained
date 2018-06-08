@@ -59,23 +59,3 @@ export const DelphiStake = DS
 export const EIP20 = EIP
 
 
-
-
-// const waitForDrizzle = () => {
-//     const state = store.getState()
-//     if (state.drizzleStatus && state.drizzleStatus.initialized == true){
-//         console.log(state.drizzleStatus.initialized)
-//         console.log(state.web3)
-//         DelphiStake.setProvider(state.web3)
-//         EIP20.setProvider(state.web3)
-//     } else {
-//         setTimeout(() => {
-//             waitForDrizzle()
-//         }, 3000);
-//     }
-// }
-
-// waitForDrizzle()
-
-
-

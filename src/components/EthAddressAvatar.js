@@ -108,7 +108,7 @@ EthAvatarIcon.propTypes = {
   export const Trigger = styled.div`
   flex:1;
   width:12vw;
-  height:12vh;
+  height:15vh;
   position:relative;
   margin:2px;
   border: 5px solid #999;

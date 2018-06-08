@@ -27,7 +27,7 @@ const StakeCardContent = (props) => {
                     <CardHeader title={'Claim Deadline'}/>
                     <CardContent>
                         {/* Unix is given in seconds, JS accepts ms */}
-                        {console.log(stake_deadline) && stake_deadline.toISOString()}
+                        {stake_deadline && stake_deadline.toUTCString()}
                     </CardContent>
                 </Card>
             </Grid>

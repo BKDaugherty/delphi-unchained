@@ -4,7 +4,7 @@ import Dialog, {DialogActions,DialogContent, DialogContentText, DialogTitle} fro
 import Grid from 'material-ui/Grid'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import {Checkbox, TextField, SelectField } from 'redux-form-material-ui'
+import {Checkbox, TextField } from 'redux-form-material-ui'
 
 const ContractMethodInputField = ({type, menu_options, ...rest}) => {
 

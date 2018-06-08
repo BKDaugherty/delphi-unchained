@@ -40,8 +40,8 @@ export const openClaim = (ethAddress, stakeAddress, tokenAddress) => async ({cla
     DeployStake.add(tokenInstance.methods.approve(stakeAddress, claimFee).send.request({from:ethAddress}))
 
     const method = claimSkipSettlement ? stakeInstance.methods.openClaimWithoutSettlement : stakeInstance.methods.openClaim
-    console.log("IPFS RETURNED HASH OF:", claimData, "TO BE:", hash)
     const hash = await IPFS_function({message:claimData})
+    console.log("IPFS RETURNED HASH OF:", claimData, "TO BE:", hash)
 
     DeployStake.add(method(claimAmount, claimFee, hash).send.request({from:ethAddress}))
     DeployStake.execute()
