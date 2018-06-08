@@ -4,13 +4,21 @@ import Dialog, {DialogActions,DialogContent, DialogContentText, DialogTitle} fro
 import Grid from 'material-ui/Grid'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import {Checkbox, TextField} from 'redux-form-material-ui'
+import {Checkbox, TextField, SelectField } from 'redux-form-material-ui'
 
-const ContractMethodInputField = ({type, ...rest}) => {
+const ContractMethodInputField = ({type, menu_options, ...rest}) => {
 
     // Set the component to be used by the Field
     let fieldComponent;
     if(type === 'checkbox') fieldComponent = Checkbox
+    else if (type === 'select-field') {
+        return (
+        <Field component='select' {...rest}>
+            {menu_options.map( (item, key) => <option key={key} value={item.value}>{item.label}</option>)}
+        </Field>
+        )
+
+    }
     else fieldComponent = TextField
     return (<Field component={fieldComponent} type={type} {...rest}/>)
 }

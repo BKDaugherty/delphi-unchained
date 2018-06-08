@@ -12,6 +12,6 @@ export const ENDPOINTS = {
     ARBITER:  `/arbiter`,
     CLAIMANT:  `/claimant`,
     STAKE:  `/stake`,
-    STAKER:  `/stake`,
+    STAKER:  `/staker`,
     WHITELISTEE:  `/whitelistee`,
 }

@@ -3,13 +3,22 @@
  */
 import {DelphiStakeFactory, EIP20} from './index'
 import {FactoryAddressLookup} from './conf'
+import {web3js} from './index'
 
+import DelphiStakeFactoryJSON from '../../drizzle/artifacts/DelphiStakeFactory.json'
+import EIP20JSON from '../../drizzle/artifacts/EIP20.json'
 
 export const createDelphiStake = (ethAddress, network) => async ({value, token, minimumFee, data, stakeReleaseTime, arbiter}) => {
-    const factoryAddress = FactoryAddressLookup(network)
-    const factory = await DelphiStakeFactory.at(factoryAddress)
-    const tokenInstance = await EIP20.at(token)
-    const tokenResult = await tokenInstance.approve(factoryAddress, value, {from:ethAddress})
-    const result = factory.createDelphiStake(value,token,minimumFee,data, stakeReleaseTime,arbiter, {from:ethAddress})
-    return result
+    const factoryAddress = FactoryAddressLookup[network]
+    
+    // Use web3js to support batch requests
+    const factoryInstance = await new web3js.eth.Contract(DelphiStakeFactoryJSON.abi, factoryAddress)
+    const tokenInstance = await new web3js.eth.Contract(EIP20JSON.abi, token)
+
+    const DeployStake = new web3js.BatchRequest()
+
+    DeployStake.add(tokenInstance.methods.approve(factoryAddress, value).send.request({from:ethAddress}))
+    DeployStake.add(factoryInstance.methods.createDelphiStake(value,token,minimumFee,data,stakeReleaseTime,arbiter).send.request({from:ethAddress}))
+    DeployStake.execute()
+    
 }

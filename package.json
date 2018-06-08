@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://BKDaugherty.github.io/delphi-unchained",
   "dependencies": {
+    "@material-ui/core": "^1.2.0",
     "@material-ui/icons": "^1.0.0-beta.43",
     "drizzle": "^1.1.5",
     "drizzle-react": "^1.1.1",

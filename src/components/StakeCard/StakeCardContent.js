@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Grid from 'material-ui/Grid'
-import Card, {CardHeader, CardContent} from 'material-ui/Card'
+import Card, {CardHeader,CardContent} from 'material-ui/Card'
+
 import Typography from 'material-ui/Typography'
 import {EthAddressDisplayCard, EthAvatarIcon} from '../EthAddressAvatar'
 import ClaimView from '../ClaimView'
@@ -19,14 +20,14 @@ const StakeCardContent = (props) => {
                 <EthAddressDisplayCard title={"Staker"} address={stake.staker}/>
             </Grid>
             <Grid item>
-                <EthAddressDisplayCard title={"Amount"} subheader={`${stake.value} ${stake.token.symbol} ${stake.token.name}`} address={stake.token.address}/>
+                <EthAddressDisplayCard title={"Amount"} subheader={`${stake.claimable_stake} ${stake.token.symbol} ${stake.token.name}`} address={stake.token.address}/>
             </Grid>
             <Grid item>
                 <Card>
                     <CardHeader title={'Claim Deadline'}/>
                     <CardContent>
                         {/* Unix is given in seconds, JS accepts ms */}
-                        {stake_deadline.toISOString()}
+                        {console.log(stake_deadline) && stake_deadline.toISOString()}
                     </CardContent>
                 </Card>
             </Grid>
@@ -42,7 +43,7 @@ const StakeCardContent = (props) => {
                 <Typography variant='headline' component='h3' color="textSecondary">
                     Whitelisted Claimants
                 </Typography>
-                {whitelist.length > 0 ? whitelist.map(addr => <Grid item key={`whitelisted-claimant-${addr}`}><EthAvatarIcon address={addr}/></Grid>) : null}
+                {whitelist.length > 0 ? whitelist.map(addr => <Grid item key={`whitelisted-claimant-${addr.claimant}`}><EthAvatarIcon address={addr.claimant}/></Grid>) : null}
             </Grid>
         </Grid>
         </Grid>

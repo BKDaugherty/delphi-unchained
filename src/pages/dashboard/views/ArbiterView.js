@@ -25,7 +25,7 @@ class ArbiterView extends React.Component{
     }
 
     render(){
-        const {claims} = this.props
+        const {claims} = this.state
         return (
             (claims && claims.length > 0) ? <ClaimFeed claims={claims}/> : <NoClaims/> 
         )

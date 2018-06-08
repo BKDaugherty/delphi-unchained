@@ -13,7 +13,7 @@ import {Update_Network} from '../../actions/web3'
 const TruffleContract = require("truffle-contract");
 
 let web3 = window.web3
-let web3js;
+export let web3js;
 
 // Poll for Web3
 const PollForWeb3Version = (web3, interval) => {

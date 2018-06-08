@@ -9,13 +9,19 @@ const NoStakes = () => <NoItems title={"You don't seem to be whitelisted on any 
 const NoClaims = () => <NoItems title={"You don't seem to have any outgoing claims"}/>
 
 class ClaimantView extends React.Component{
+    constructor(props){
+        super(props)
+        this.loadClaims = this.loadClaims.bind(this)
+        this.loadStakes = this.loadStakes.bind(this)
+    }
+
     state = {
         claims:[],
         stakes:[]
     }
 
     async loadClaims(){
-        const claims = DelphiAPI.GetClaimant(this.props.userEthAddress)
+        const claims = await DelphiAPI.GetClaimant(this.props.userEthAddress)
         if(claims){
             this.setState({claims})
         } else {
@@ -24,7 +30,7 @@ class ClaimantView extends React.Component{
     }
 
     async loadStakes(){
-        const stakes = DelphiAPI.GetWhitelistee(this.props.userEthAddress)
+        const stakes = await DelphiAPI.GetWhitelistee(this.props.userEthAddress)
         if(stakes){
             this.setState({stakes})
         } else {
@@ -39,7 +45,6 @@ class ClaimantView extends React.Component{
 
     render(){
         let {claims, stakes} = this.state
-
         return (
             <Grid container spacing={16}>
                 <Grid item sm={6} md={6} lg={6} xl={6}>

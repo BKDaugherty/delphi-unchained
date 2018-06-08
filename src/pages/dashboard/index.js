@@ -16,6 +16,8 @@ import {
     Typography
   } from "material-ui";
 
+import Loading from './../../components/Loading'
+
   import './../../index.css'
 
 import ReactCSSTransitionReplace from 'react-css-transition-replace'
@@ -109,7 +111,7 @@ const ClippedDrawer = (props) => {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {/* Adds the switch router*/}
-              <SwitchRoutes location={location} userEthAddress={userEthAddress}/>
+              {userEthAddress? <SwitchRoutes location={location} userEthAddress={userEthAddress}/> : <Loading/>}
         </main>
       </div>
     );

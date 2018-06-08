@@ -5,7 +5,7 @@
 
 import OpenClaim from '../../DialogForms/OpenClaim';
 
-const ApplyEthAddresses = (actions) => (ethAddress, stakeAddress) => actions.map(action => action(ethAddress, stakeAddress))
+const ApplyEthAddresses = (actions) => (ethAddress, stakeAddress, tokenAddress) => actions.map(action => action(ethAddress, stakeAddress, tokenAddress))
 
 const WhitelisteeActions = [OpenClaim]
 

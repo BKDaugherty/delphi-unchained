@@ -2,7 +2,8 @@ import React from 'react'
 import Typography from 'material-ui/Typography'
 import PropTypes from 'prop-types'
 
-import Card, {CardContent, CardHeader} from 'material-ui/Card'
+import Card, {CardHeader, CardContent} from 'material-ui/Card'
+
 
 import ExpansionPanel, {
     ExpansionPanelSummary,

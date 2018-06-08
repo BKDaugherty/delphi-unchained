@@ -11,7 +11,7 @@ export const DelphiAPIGetRequest = (endpoint) => async (address) => {
     try {
         // Create the URL that we would like to access
         const request_url = `${BASEURL}${endpoint}/${address}`
-        
+        console.log(request_url)
         // Make the request -- Always get in this case
         const result = await fetch(request_url)
 

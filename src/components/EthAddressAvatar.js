@@ -1,17 +1,17 @@
 import React from 'react'
 import Blockies from 'react-blockies'
-import { CardHeader } from 'material-ui/Card'
+import {CardHeader} from 'material-ui/Card'
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 
 // Should be an avatar card that renders either the avatar from ethavatar,
 // or the address as a blockie
-export const EthAvatarIcon = (props) => (
-    props.address ? <Blockies
+export const EthAvatarIcon = (props) => {
+    return (props.address ? <Blockies
         seed={props.address.toLowerCase()} 
         {...props}
-    /> : null
-  )
+    /> : null)
+}
 
 EthAvatarIcon.propTypes = {
     address:PropTypes.string.isRequired

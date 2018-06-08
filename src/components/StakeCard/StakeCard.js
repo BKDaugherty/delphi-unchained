@@ -1,7 +1,7 @@
 /* Renders an informational and actionable card for Stakes */
 
 import React from 'react'
-import Card, {CardContent, CardActions, CardHeader} from 'material-ui/Card'
+import Card, {CardHeader,CardActions,CardContent} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 
 import PropTypes from 'prop-types'
@@ -43,8 +43,8 @@ const StakeCard = (props) => {
     if(addressIs(stake.staker)){
         actions = StakerActions(userEthAddress, address, token_address)
     }
-    else if (whitelist.some(addressIs)){
-        actions = WhitelisteeActions(userEthAddress, address)
+    else if (whitelist.some( elem => addressIs(elem.claimant) )){
+        actions = WhitelisteeActions(userEthAddress, address, token_address)
     } else {
         actions = PublicActions
     }

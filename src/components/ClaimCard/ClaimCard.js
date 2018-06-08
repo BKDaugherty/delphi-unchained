@@ -4,7 +4,7 @@
 import React from 'react'
 
 import Grid from 'material-ui/Grid'
-import Card, { CardContent, CardActions, CardHeader } from 'material-ui/Card'
+import Card, {CardHeader, CardActions, CardContent} from 'material-ui/Card'
 import { EthAddressDisplayCard } from '../EthAddressAvatar'
 
 import DialogActionList from '../DialogActionList'

@@ -1,13 +1,13 @@
 import {openClaim} from '../../../services/delphi-contract/StakeActions'
 import validateOpenClaim from './validate'
 
-const OpenClaim = (ethAddress, stakeAddress) => ({
+const OpenClaim = (ethAddress, stakeAddress, tokenAddress) => ({
     label:'Open a Claim',
     dialogProps:{
         title:'Open a Claim',
         description:"Open a claim against this stake",
         formName:'OpenClaimForm',
-        onSubmit:openClaim(ethAddress, stakeAddress),
+        onSubmit:openClaim(ethAddress, stakeAddress, tokenAddress),
         validate:validateOpenClaim,
         fields:[
         {
