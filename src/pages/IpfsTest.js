@@ -1,5 +1,7 @@
+/**
+ * Test Page used for creating IPFS funcitonality
+ */
 
-// Must import react in every module
 import React from 'react'
 
 import Grid from 'material-ui/Grid'

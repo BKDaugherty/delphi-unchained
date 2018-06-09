@@ -1,3 +1,8 @@
+/**
+ * Specifies the components and pages that one will see if they are
+ * signed into the Delphi platform as a claimant.
+ */
+
 import React from 'react'
 import Grid from 'material-ui/Grid'
 import NoItems from '../../../components/NoItems'

@@ -1,4 +1,4 @@
-/* Module Export of API */
+/* Module Export of JavaScript SDK for interacting with the Delphi API */
 
 import {DelphiAPIGetRequest} from './common'
 import {ENDPOINTS} from './config'

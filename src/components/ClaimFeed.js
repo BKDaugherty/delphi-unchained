@@ -1,3 +1,7 @@
+/**
+ * Takes an array of claims and makes a feed
+ */
+
 import React from 'react'
 import CardFeed from './CardFeed'
 import ClaimCard from './ClaimCard'

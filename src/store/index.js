@@ -1,3 +1,8 @@
+/**
+ * File used to configure the redux store, which supplies state to our
+ * application.
+ */
+
 import {createStore, applyMiddleware, compose } from 'redux'
 import middleware from './middleware'
 import rootReducer from '../reducers'

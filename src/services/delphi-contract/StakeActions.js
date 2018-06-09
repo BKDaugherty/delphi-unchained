@@ -1,4 +1,8 @@
-import {DelphiStake, EIP20} from '../../services/delphi-contract'
+/**
+ * Defines all of the actions that one can make on a stake using the DelphiStake Contract
+ */
+
+import {DelphiStake} from '../../services/delphi-contract'
 import {IPFS_function} from '../ipfs'
 import DelphiStakeJSON from '../../drizzle/artifacts/DelphiStake.json'
 import EIP20JSON from '../../drizzle/artifacts/EIP20.json'
@@ -11,12 +15,18 @@ export const whitelistClaimant = (ethAddress, stakeAddress) => async ({claimantA
 }
 
 export const increaseStakeAmount = (ethAddress, stakeAddress, tokenAddress) => async ({increaseStakeAmount}) => {
-    // Need to know the addresses of contracts being used
-    const stake = await DelphiStake.at(stakeAddress)
-    const token = await EIP20.at(tokenAddress)
-    const tokenResult = await token.approve(stake.address, increaseStakeAmount, {from:ethAddress})
-    const result = stake.increaseStake(increaseStakeAmount, {from:ethAddress})
-    return result
+
+    const stakeInstance = await new web3js.eth.Contract(DelphiStakeJSON.abi, stakeAddress)
+    const tokenInstance = await new web3js.eth.Contract(EIP20JSON.abi, tokenAddress)
+
+    const IncreaseStakeAmount = new web3js.BatchRequest()
+
+    IncreaseStakeAmount.add(tokenInstance.methods.approve(stakeAddress, increaseStakeAmount).send.request({from:ethAddress}))
+    IncreaseStakeAmount.add(stakeInstance.methods.increaseStake(increaseStakeAmount).send.request({from:ethAddress}))
+
+    IncreaseStakeAmount.execute()
+
+    return
 }
 
 export const extendStakeReleaseTime = (ethAddress, stakeAddress) => async ({stakeReleaseTime}) => {
@@ -35,15 +45,15 @@ export const openClaim = (ethAddress, stakeAddress, tokenAddress) => async ({cla
     const stakeInstance = await new web3js.eth.Contract(DelphiStakeJSON.abi, stakeAddress)
     const tokenInstance = await new web3js.eth.Contract(EIP20JSON.abi, tokenAddress)
 
-    const DeployStake = new web3js.BatchRequest()
+    const OpenClaim = new web3js.BatchRequest()
 
-    DeployStake.add(tokenInstance.methods.approve(stakeAddress, claimFee).send.request({from:ethAddress}))
+    OpenClaim.add(tokenInstance.methods.approve(stakeAddress, claimFee).send.request({from:ethAddress}))
 
     const method = claimSkipSettlement ? stakeInstance.methods.openClaimWithoutSettlement : stakeInstance.methods.openClaim
     const hash = await IPFS_function({message:claimData})
     console.log("IPFS RETURNED HASH OF:", claimData, "TO BE:", hash)
 
-    DeployStake.add(method(claimAmount, claimFee, hash).send.request({from:ethAddress}))
-    DeployStake.execute()
+    OpenClaim.add(method(claimAmount, claimFee, hash).send.request({from:ethAddress}))
+    OpenClaim.execute()
     return 
 }

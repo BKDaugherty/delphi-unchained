@@ -48,7 +48,7 @@ const ClaimCard = ({userEthAddress, claim}) => {
 
 const ClaimCardView = (props) => (
     <Card>
-        <CardHeader title={`Claim ID ${props.claim.id} for ${props.claim.amount} is in ${props.claim.status}`}/>
+        <CardHeader title={`Claim ID ${props.claim.id} for ${props.claim.amount} : ${props.claim.status}`}/>
         <CardContent>
         <Grid container flexDirection='column' alignItems='center' justify='space-around' spacing={16}>
             <Grid item>

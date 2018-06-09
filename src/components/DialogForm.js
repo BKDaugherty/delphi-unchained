@@ -1,3 +1,8 @@
+/**
+ * The Dialog Form creates a button on the end of a card, and links into Redux
+ * Form, creating a dialog that pops up and prompts the user to enter some information.
+ */
+
 import React from 'react'
 import Button from 'material-ui/Button'
 import Dialog, {DialogActions,DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog'

@@ -1,3 +1,8 @@
+/**
+ * Specifies the components and pages that one will see if they are
+ * signed into the Delphi platform as an arbiter.
+ */
+
 import React from 'react'
 import NoItems from '../../../components/NoItems'
 import ClaimFeed from '../../../components/ClaimFeed'

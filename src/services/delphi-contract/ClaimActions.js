@@ -1,5 +1,5 @@
 /**
- * Uses Truffle contract methods to interact with DelphiStake Claims
+ * Defines the interface between the Front End and the Delphi Contract claims.
  */
 
 import {DelphiStake, EIP20} from '../../services/delphi-contract'

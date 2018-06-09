@@ -1,3 +1,8 @@
+/**
+ * Defines the Dashboard View that a Delphi User will see upon entering the
+ * authorized section of the app.
+ */
+
 import React from 'react'
 import Typography from 'material-ui/Typography'
 

@@ -1,3 +1,4 @@
 /*
-    Interface for communicating with Chat Portion
+    Interface for communicating with Chat Portion.
+    This feature is a future enhancement to the Delphi platform
 */

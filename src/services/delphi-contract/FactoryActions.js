@@ -1,6 +1,8 @@
 /**
  * Defines the functions to interact with the Delphi Factory
+ * Smart Contract.
  */
+
 import {FactoryAddressLookup} from './conf'
 import {web3js} from './index'
 

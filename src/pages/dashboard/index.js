@@ -1,5 +1,9 @@
-import React from 'react'
+/**
+ * Defines the Layout of the Authorized portion of our app. 
+ * Loads in the subsection views by using a declarative syntax
+ */
 
+import React from 'react'
 import { Switch, Route,  } from "react-router-dom";
 import dashboardRoutes from './routes'
 import AppHeader from '../../components/AppHeader'

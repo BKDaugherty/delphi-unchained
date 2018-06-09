@@ -1,3 +1,7 @@
+/**
+ * Specifies the layout of the landing page that a user comes to when they first access Delphi Unchained.
+ */
+
 import React from 'react'
 import styled from 'styled-components'
 import DelphiTempleImage from '../assets/images/DelphiTemple.jpg'

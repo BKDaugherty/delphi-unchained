@@ -28,7 +28,7 @@ const StakeCardHeader = (props) => (
 // Renders the information on a stake
 const StakeCard = (props) => {
     let { classes, stake, userEthAddress} = props
-    const address = stake.address
+    const address = stake.address ? stake.address : props.address
     const whitelist = stake.whitelist
     const token_address = stake.token.address
 

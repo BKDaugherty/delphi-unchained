@@ -1,3 +1,8 @@
+/**
+ * Specifies the components and pages that one will see if they are
+ * signed into the Delphi platform as a staker.
+ */
+
 import React from 'react'
 import AddIcon from '@material-ui/icons/Add'
 import Button from 'material-ui/Button'

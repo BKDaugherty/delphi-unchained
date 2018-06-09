@@ -1,22 +1,28 @@
 # Delphi Unchained
 
+Delphi Unchained is a front-end dapplication for the [Delphi](https://github.com/Bounties-Network/Delphi) Protocol. To ensure quick transactions, this dapp leverages the caching layer described [here](https://github.com/c-o-l-o-r/DelphiAPI) for a better user experience.
+
+
+
+## Overview
+
+The front end is a React-Redux application that leverages Material-UI components for quick and consistent themes, and the Drizzle platform by Truffle to interact with the blockchain. React-Redux applications typically follow a standard architectural pattern that is similar in some sense to MVC frameworks, but focuses heavily on immutability and pure functions; in some sense, it is similar to the observer pattern. 
+
+The core of the front end involves the view. Here, our application uses Material-UI and standard React components in order to display a user interface, and handle ui events such as text input updates and button presses. Upon receiving events, the React application interacts with connected Redux and Drizzle components, and dispatches actions. These actions are handled by middleware in order to make requests to external services, such as Smart Contract functionality, our Delphi Unchained Falcon API and eventually IPFS. After making these requests, our redux handlers can notify the single store of any changes that are required to the current state by passing off the actions generated to the reducers. The reducers are immutable pure functions that calculate the state of our application based on the previous state and the given action. Our root reducer is composed of all of the reducers for our state, and allows us a single entry point for state mutation. Once the state has been updated, this information is sent through our store back into our connected components, and eventually into our presentational components to render any needed changes. Luckily for us, React and Redux provide a lot of optimizations for this transfer, and our application is kept performant because of this.
+
 ## Index
 
-* [Development Prerequisites](#Prerequisites)
-* [Start Up](#Start up)
-* Helpful Docs
+* Development Docs 
+  * [Development Prerequisites](#Prerequisites)
+  * [Start Up](#Start up)
   * [Coding Conventions](/docs/conventions.md)
   * [Drizzle](/docs/drizzle.md)
-  * [IPFS](/docs/ipfs.md)
+  * [IPFS](/docs/IPFS_setup.md)
   * [MetaMask](/docs/metamask.md)
-  * [Material UI](/docs/mui.md)
-  * [React](/docs/react.md)
   * [Redux](/docs/redux.md)
-  * [Styled-Components](/docs/styled-components.md)
-* [Create React App](#Create React App Docs)
+* [Delphi API SDK Tests](/serdelp)
+* [Create React App Documentation](#'Create React App Docs)
 
-
-Delphi Unchained is a front-end dapplication for the [Delphi](https://github.com/Bounties-Network/Delphi) Protocol. To ensure quick transactions, this dapp leverages the caching layer described [here](https://github.com/c-o-l-o-r/DelphiAPI) for a better experience. 
 
 ### Prerequisites
 If you'd like to run the entire app on your machine, then before starting you'll need [Docker](https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac) up and running on your machine and a local Ethereum network running on your localhost:8545. [Deth](https://github.com/c-o-l-o-r/deth) plays nicely with this setup. If you'd like to use the API as a caching layer, you'll also need to run [DelphiAPI](https://github.com/c-o-l-o-r/DelphiAPI).
@@ -41,9 +47,7 @@ If all goes well, (please PM @BKDaugherty if it does not), you should now have a
 ### Front End Architecture
 ![Architecture Diagram](/docs/images/Front-End-Architecture.png)
 
-The front end is a React-Redux application that leverages Material-UI components for quick and consistent themes, and the Drizzle platform by Truffle to interact with the blockchain. React-Redux applications typically follow a standard architectural pattern that is similar in some sense to MVC frameworks, but focuses heavily on immutability and pure functions; in some sense, it is similar to the observer pattern. 
 
-The core of the front end involves the view. Here, our application uses Material-UI and standard React components in order to display a user interface, and handle ui events such as text input updates and button presses. Upon receiving events, the React application interacts with connected Redux and Drizzle components, and dispatches actions. These actions are handled by middleware in order to make requests to external services, such as Smart Contract functionality, our Delphi Unchained Falcon API and eventually IPFS. After making these requests, our redux handlers can notify the single store of any changes that are required to the current state by passing off the actions generated to the reducers. The reducers are immutable pure functions that calculate the state of our application based on the previous state and the given action. Our root reducer is composed of all of the reducers for our state, and allows us a single entry point for state mutation. Once the state has been updated, this information is sent through our store back into our connected components, and eventually into our presentational components to render any needed changes. Luckily for us, React and Redux provide a lot of optimizations for this transfer, and our application is kept performant because of this.
 
 ### Create React App Docs
 
@@ -55,6 +59,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 ## Table of Contents
 
 - [Delphi Unchained](#delphi-unchained)
+  - [Overview](#overview)
   - [Index](#index)
     - [Prerequisites](#prerequisites)
     - [Suggested Prerequisites](#suggested-prerequisites)

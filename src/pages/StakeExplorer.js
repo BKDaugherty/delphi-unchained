@@ -1,4 +1,7 @@
-
+/**
+ * Defines the Stake Exploration Page, where a user can enter a valid stake address,
+ * and navigate to that stake.
+ */
 
 
 import React from 'react'

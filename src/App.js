@@ -17,6 +17,10 @@ import { MuiThemeProvider, } from 'material-ui/styles';
 import mui_theme from './styles/mui-theme'
 import { ThemeProvider } from 'styled-components';
 
+/** 
+ * React Component that defines all of the higher order provider components we
+ * use
+ */
 
 class App extends Component {
   render() {

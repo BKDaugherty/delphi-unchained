@@ -1,3 +1,7 @@
+/**
+ * Defines the visualization for a claim on our platform
+ */
+
 import React from 'react'
 import Typography from 'material-ui/Typography'
 import PropTypes from 'prop-types'

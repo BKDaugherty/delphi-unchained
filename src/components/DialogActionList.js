@@ -1,3 +1,7 @@
+/**
+ * Takes a list of Dialog actions, and creates Dialog forms from them
+ */
+
 import React from 'react'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
