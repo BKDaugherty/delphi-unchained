@@ -1,4 +1,7 @@
-Using IPFS with Infura
+We wanted to avoid running our own node and the documentation for doing that is currently very sparse.
+Instead, we are running a simplified version of IPFS, nano-ipfs-store, which allows up to connect to the IPFS network without our own node.
+
+### Using IPFS with Infura
 
 Possible addresses to use besides https://ipfs.infura.io:5001: 
 
@@ -18,7 +21,7 @@ IPFS Gateway
 https://ipfs.infura.io 
 
 
-Set up:
+### Set up:
 
 npm install --save ipfs-api
 npm install ipfs --global
@@ -33,5 +36,6 @@ await ipfs.add(data_to_add)
 await ipfs.cat(hash)
 
 
-
+An alternative to nano-ipfs-store if needed is ipfs-mini which would be installed using:
+npm install --save ipfs-mini
 
