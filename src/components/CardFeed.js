@@ -5,8 +5,8 @@
 import React from 'react'
 import Grid from 'material-ui/Grid'
 
-const CardFeed = (props) => (
-    <Grid container wrap='nowrap' direction={'column'} spacing={16}>
+const CardFeed = props => (
+    <Grid container wrap="nowrap" direction={'column'} spacing={16}>
         {props.children}
     </Grid>
 )

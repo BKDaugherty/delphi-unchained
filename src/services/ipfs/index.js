@@ -1,12 +1,11 @@
 //IPFS function
 //Takes an object and returns a hash
-export const IPFS_function = async ({message:claimData}) => {
-
+export const IPFS_function = async ({ message: claimData }) => {
     //required to connect to the IPFS network
-    var ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
-    //https://ropsten.infura.io/DlraUbj4NfuZMGiKKNUc 
+    var ipfs = require('nano-ipfs-store').at('https://ipfs.infura.io:5001')
+    //https://ropsten.infura.io/DlraUbj4NfuZMGiKKNUc
 
-    //returns a hash of the given claimData    
+    //returns a hash of the given claimData
     const ipfsHash = await ipfs.add(claimData)
 
     //currently logging value to verify manually
@@ -15,14 +14,13 @@ export const IPFS_function = async ({message:claimData}) => {
     //retrieves the data and logs it to the console
     var returned = ipfs.cat(ipfsHash)
     console.log(returned)
-    
+
     //retrieves the hash value without uploading it
-    const cid2 = await ipfs.cid(claimData);
+    const cid2 = await ipfs.cid(claimData)
     console.log(cid2)
 
     //returns a promise
-    return (ipfsHash)
-    
+    return ipfsHash
 }
 
 /*export const IPFS_function = async ({message:claimData}) => {

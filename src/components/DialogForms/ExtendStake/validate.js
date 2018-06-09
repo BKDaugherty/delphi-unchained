@@ -1,9 +1,11 @@
 import {ValidateRequiredTimeInFuture} from '../validation'
 
-export default ({stakeReleaseTime}) => {
-    let errors = {} 
+export default ({ stakeReleaseTime }) => {
+    let errors = {}
 
-    errors.stakeReleaseTime = ValidateRequiredTimeInFuture({value:stakeReleaseTime}).error
+    errors.stakeReleaseTime = ValidateRequiredTimeInFuture({
+        value: stakeReleaseTime
+    }).error
 
     return errors
     // TODO: Check if stake release time given is greater than current

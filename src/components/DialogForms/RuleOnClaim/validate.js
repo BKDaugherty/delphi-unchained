@@ -1,1 +1,1 @@
-export default ({claimId, ruling}) => ({})
+export default ({ claimId, ruling }) => ({})

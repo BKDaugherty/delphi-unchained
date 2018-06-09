@@ -3,9 +3,10 @@
  * a stake card
  */
 
-import OpenClaim from '../../DialogForms/OpenClaim';
+import OpenClaim from '../../DialogForms/OpenClaim'
 
-const ApplyEthAddresses = (actions) => (ethAddress, stakeAddress, tokenAddress) => actions.map(action => action(ethAddress, stakeAddress, tokenAddress))
+const ApplyEthAddresses = actions => (ethAddress, stakeAddress, tokenAddress) =>
+    actions.map(action => action(ethAddress, stakeAddress, tokenAddress))
 
 const WhitelisteeActions = [OpenClaim]
 

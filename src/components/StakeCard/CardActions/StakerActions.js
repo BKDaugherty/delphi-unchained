@@ -8,8 +8,8 @@ import IncreaseStakeAmount from '../../DialogForms/IncreaseStakeAmount'
 import WhitelistClaimant from '../../DialogForms/WhitelistClaimant'
 import WithdrawStake from '../../DialogForms/WithdrawStake'
 
-
-const ApplyEthAddresses = (actions) => (ethAddress, stakeAddress, tokenAddress) => actions.map(action => action(ethAddress,stakeAddress,tokenAddress))
+const ApplyEthAddresses = actions => (ethAddress, stakeAddress, tokenAddress) =>
+    actions.map(action => action(ethAddress, stakeAddress, tokenAddress))
 
 const StakerActions = [
     ExtendStake,
